@@ -2,7 +2,20 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import { colors } from '../StyleConstants/Styles';
 import './LoginPage.css';
+
+const styles = {
+  underlineStyle: {
+    borderColor: colors.contrast,
+  },
+  floatingLabelStyle: {
+    color: colors.black
+  },
+  overlayStyle: {
+    backgroundColor: colors.contrast,
+  }
+};
 
 class LoginPage extends Component {
   constructor(props) {
@@ -11,6 +24,7 @@ class LoginPage extends Component {
     this.state = {
       email: '',
       emailError: '',
+      isForgottenPassword: false,
       password: '',
       passwordError: '',
     };
@@ -49,10 +63,14 @@ class LoginPage extends Component {
   }
 
   render() {
-    const { email, emailError, passwordError } = this.state;
+    const { email, emailError, isForgottenPassword, passwordError } = this.state;
     return (
       <div className="wrapper">
-        <div>
+        <div className="border">
+          <div className="header">
+            <h1>Prihlásenie</h1>
+          </div>
+          <div className="form-wrapper">
           <TextField
             id="email"
             errorText={emailError}
@@ -60,21 +78,32 @@ class LoginPage extends Component {
             hintText="meno@email.com"
             floatingLabelText="Email"
             value={email}
+            underlineStyle={styles.underlineStyle}
+            underlineFocusStyle={styles.underlineStyle}
+            floatingLabelStyle={styles.floatingLabelStyle}
           />
-        <div>
-          <TextField
-            id="heslo"
-            errorText={passwordError}
-            onChange={this.handlePasswordChange}
-            floatingLabelText="Heslo"
-            type="password"
-          />
+          {
+            isForgottenPassword && <TextField
+              id="heslo"
+              errorText={passwordError}
+              onChange={this.handlePasswordChange}
+              floatingLabelText="Heslo"
+              type="password"
+              underlineStyle={styles.underlineStyle}
+              underlineFocusStyle={styles.underlineStyle}
+              floatingLabelStyle={styles.floatingLabelStyle}
+            />
+          }
+          </div>
+          <div className="button">
+            <RaisedButton
+              onClick={this.handleLogin}
+              label="Prihlás"
+              overlayStyle={styles.overlayStyle}
+              fullWidth
+            />
+          </div>
         </div>
-        </div>
-        <RaisedButton
-          onClick={this.handleLogin}
-          label="Prihlás"
-        />
       </div>
     );
   }
