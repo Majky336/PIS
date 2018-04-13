@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:ns="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/types" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Team024Pouzivatel" targetNamespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/types" targetNamespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/types">
+      <xsd:complexType name="getById">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getById" nillable="true" type="ns:getById" />
+      <xsd:complexType name="Pouzivatel">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="body" type="xsd:int" />
+          <xsd:element name="rola" type="xsd:int" />
+          <xsd:element name="datRegistracie" type="xsd:dateTime" />
+          <xsd:element name="poslednePrihlasenie" type="xsd:dateTime" />
+          <xsd:element name="heslo" type="xsd:string" />
+          <xsd:element name="prihlasovacieMeno" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Pouzivatel" nillable="true" type="ns:Pouzivatel" />
+      <xsd:complexType name="getByIdResponse">
+        <xsd:sequence>
+          <xsd:element name="pouzivatel" type="ns:Pouzivatel" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByIdResponse" nillable="true" type="ns:getByIdResponse" />
+      <xsd:complexType name="ArrayOfIds">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="id" nillable="true" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getByAttributeValue">
+        <xsd:sequence>
+          <xsd:element name="attribute_name" type="xsd:string" />
+          <xsd:element name="attribute_value" type="xsd:string" />
+          <xsd:element name="ids" type="ns:ArrayOfIds" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByAttributeValue" nillable="true" type="ns:getByAttributeValue" />
+      <xsd:complexType name="ArrayOfPouzivatels">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="pouzivatel" nillable="true" type="ns:Pouzivatels" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Pouzivatels">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="body" type="xsd:int" />
+          <xsd:element name="rola" type="xsd:int" />
+          <xsd:element name="datRegistracie" type="xsd:dateTime" />
+          <xsd:element name="poslednePrihlasenie" type="xsd:dateTime" />
+          <xsd:element name="heslo" type="xsd:string" />
+          <xsd:element name="prihlasovacieMeno" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Pouzivatels" nillable="true" type="ns:Pouzivatels" />
+      <xsd:complexType name="getByAttributeValueResponse">
+        <xsd:sequence>
+          <xsd:element name="pouzivatels" type="ns:ArrayOfPouzivatels" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByAttributeValueResponse" nillable="true" type="ns:getByAttributeValueResponse" />
+      <xsd:complexType name="getByNumericCondition">
+        <xsd:sequence>
+          <xsd:element name="attribute_name" type="xsd:string" />
+          <xsd:element name="attribute_value" type="xsd:string" />
+          <xsd:element name="math_condition" type="xsd:string" />
+          <xsd:element name="ids" type="ns:ArrayOfIds" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByNumericCondition" nillable="true" type="ns:getByNumericCondition" />
+      <xsd:complexType name="getByNumericConditionResponse">
+        <xsd:sequence>
+          <xsd:element name="pouzivatels" type="ns:ArrayOfPouzivatels" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByNumericConditionResponse" nillable="true" type="ns:getByNumericConditionResponse" />
+      <xsd:complexType name="getAll">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:element name="getAll" nillable="true" type="ns:getAll" />
+      <xsd:complexType name="getAllResponse">
+        <xsd:sequence>
+          <xsd:element name="pouzivatels" type="ns:ArrayOfPouzivatels" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getAllResponse" nillable="true" type="ns:getAllResponse" />
+      <xsd:complexType name="insert">
+        <xsd:sequence>
+          <xsd:element name="team_id" type="xsd:string" />
+          <xsd:element name="team_password" type="xsd:string" />
+          <xsd:element name="Pouzivatel" type="ns:Pouzivatel" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="insert" nillable="true" type="ns:insert" />
+      <xsd:complexType name="insertResponse">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="insertResponse" nillable="true" type="ns:insertResponse" />
+      <xsd:complexType name="update">
+        <xsd:sequence>
+          <xsd:element name="team_id" type="xsd:string" />
+          <xsd:element name="team_password" type="xsd:string" />
+          <xsd:element name="entity_id" type="xsd:int" />
+          <xsd:element name="Pouzivatel" type="ns:Pouzivatel" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="update" nillable="true" type="ns:update" />
+      <xsd:complexType name="updateResponse">
+        <xsd:sequence>
+          <xsd:element name="updates" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="updateResponse" nillable="true" type="ns:updateResponse" />
+      <xsd:complexType name="delete">
+        <xsd:sequence>
+          <xsd:element name="team_id" type="xsd:string" />
+          <xsd:element name="team_password" type="xsd:string" />
+          <xsd:element name="entity_id" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="delete" nillable="true" type="ns:delete" />
+      <xsd:complexType name="deleteResponse">
+        <xsd:sequence>
+          <xsd:element name="deleted" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="deleteResponse" nillable="true" type="ns:deleteResponse" />
+    </xsd:schema>
+  </types>
+  <message name="getByIdRequest">
+    <part name="parameters" element="ns:getById" />
+  </message>
+  <message name="getByIdResponse">
+    <part name="parameters" element="ns:getByIdResponse" />
+  </message>
+  <message name="getByAttributeValueRequest">
+    <part name="parameters" element="ns:getByAttributeValue" />
+  </message>
+  <message name="getByAttributeValueResponse">
+    <part name="parameters" element="ns:getByAttributeValueResponse" />
+  </message>
+  <message name="getByNumericConditionRequest">
+    <part name="parameters" element="ns:getByNumericCondition" />
+  </message>
+  <message name="getByNumericConditionResponse">
+    <part name="parameters" element="ns:getByNumericConditionResponse" />
+  </message>
+  <message name="getAllRequest">
+    <part name="parameters" element="ns:getAll" />
+  </message>
+  <message name="getAllResponse">
+    <part name="parameters" element="ns:getAllResponse" />
+  </message>
+  <message name="insertRequest">
+    <part name="parameters" element="ns:insert" />
+  </message>
+  <message name="insertResponse">
+    <part name="parameters" element="ns:insertResponse" />
+  </message>
+  <message name="updateRequest">
+    <part name="parameters" element="ns:update" />
+  </message>
+  <message name="updateResponse">
+    <part name="parameters" element="ns:updateResponse" />
+  </message>
+  <message name="deleteRequest">
+    <part name="parameters" element="ns:delete" />
+  </message>
+  <message name="deleteResponse">
+    <part name="parameters" element="ns:deleteResponse" />
+  </message>
+  <portType name="Team024PouzivatelPortType">
+    <operation name="getById">
+      <input message="tns:getByIdRequest" />
+      <output message="tns:getByIdResponse" />
+    </operation>
+    <operation name="getByAttributeValue">
+      <input message="tns:getByAttributeValueRequest" />
+      <output message="tns:getByAttributeValueResponse" />
+    </operation>
+    <operation name="getByNumericCondition">
+      <input message="tns:getByNumericConditionRequest" />
+      <output message="tns:getByNumericConditionResponse" />
+    </operation>
+    <operation name="getAll">
+      <input message="tns:getAllRequest" />
+      <output message="tns:getAllResponse" />
+    </operation>
+    <operation name="insert">
+      <input message="tns:insertRequest" />
+      <output message="tns:insertResponse" />
+    </operation>
+    <operation name="update">
+      <input message="tns:updateRequest" />
+      <output message="tns:updateResponse" />
+    </operation>
+    <operation name="delete">
+      <input message="tns:deleteRequest" />
+      <output message="tns:deleteResponse" />
+    </operation>
+  </portType>
+  <binding name="Team024PouzivatelBinding" type="tns:Team024PouzivatelPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getById">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/#getById" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </output>
+    </operation>
+    <operation name="getByAttributeValue">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/#getByAttributeValue" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </output>
+    </operation>
+    <operation name="getByNumericCondition">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/#getByNumericCondition" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </output>
+    </operation>
+    <operation name="getAll">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/#getAll" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </output>
+    </operation>
+    <operation name="insert">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/#insert" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </output>
+    </operation>
+    <operation name="update">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/#update" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </output>
+    </operation>
+    <operation name="delete">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel/#delete" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024pouzivatel" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Team024PouzivatelService">
+    <port name="Team024PouzivatelPort" binding="tns:Team024PouzivatelBinding">
+      <soap:address location="http://labss2.fiit.stuba.sk/pis/ws/Students/Team024Pouzivatel" />
+    </port>
+  </service>
+</definitions>
