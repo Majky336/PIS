@@ -48,9 +48,9 @@ class LoginPage extends Component {
       this.setState({ passwordError: 'Toto pole je povinné' })
     }
 
-    api.post('/api/login', {
-      eMail: 'konomrd',
-      heslo: 'konomrd',
+    api.post('/api/login/', {
+  	 email: 'konomrd',
+      heslo: 'konomrd'
     }).then(response => {
       console.log(response);
     }).catch(error => {
