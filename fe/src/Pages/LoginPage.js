@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
+import TextField from 'material-ui/TextField';
+import { connect } from 'react-redux';
 
 import { colors } from '../StyleConstants/Styles';
-import { api } from '../api/api';
+import { fetchUser } from '../components/User/actions';
+import { isUserError, isUserFetching, getUser } from '../components/User/reducer';
 import './LoginPage.css';
 
 const styles = {
@@ -26,6 +30,7 @@ class LoginPage extends Component {
       email: '',
       emailError: '',
       isForgottenPassword: false,
+      isOpen: false,
       password: '',
       passwordError: '',
     };
@@ -35,45 +40,87 @@ class LoginPage extends Component {
     const { target } = event;
     const { value } = target;
 
-    this.setState({ email: value });
+    this.setState({ email: value }, this.validateEmail);
   }
 
   handlePasswordChange = event => {
     const { target } = event;
     const { value } = target;
 
-    this.setState({ password: value });
+    this.setState({ password: value }, this.validatePassword);
+  }
+
+  handleRequestClose = () => {
+    this.setState({ isOpen: false });
+  }
+
+  validateEmail = () => {
+    const { email } = this.state;
+
+    if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      this.setState({ emailError: 'Nesprávny formát' });
+    } else {
+      this.setState({ emailError: '' });
+    }
+  }
+
+  validatePassword = () => {
+    const { password } = this.state;
+
+    if (!password) {
+      this.setState({ passwordError: 'Toto pole je povinné' });
+    } else {
+      this.setState({ passwordError: '' });
+    }
   }
 
   handleLogin = () => {
-    const { email, password } = this.state;
-
-    this.setState({ emailError: '', passwordError: '' });
+    const { email, password, isForgottenPassword } = this.state;
+    const { fetchUser } = this.props;
 
     if (!email) {
-      this.setState({ emailError: 'Toto pole je povinné' })
-    }
-
-    if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      this.setState({ emailError: 'Nesprávny formát' })
+      return this.setState({ emailError: 'Toto pole je povinné' });
     }
 
     if (!password) {
-      this.setState({ passwordError: 'Toto pole je povinné' })
+      return this.setState({ passwordError: 'Toto pole je povinné' });
     }
 
-    api.post('/api/login/', {
-  	 email: 'konomrd',
-      heslo: 'konomrd'
-    }).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-    });
+    if (!isForgottenPassword) {
+      fetchUser({email, password});
+    }
+
+    if (isForgottenPassword) {
+      this.setState({ isOpen: true });
+    }
+  }
+
+  handleForgottenPassword = () => {
+    const { isForgottenPassword } = this.state;
+
+    this.setState({ isForgottenPassword: !isForgottenPassword });
+  }
+
+  getButtonLabels = () => {
+    const { isForgottenPassword } = this.state;
+
+    if (isForgottenPassword) {
+      return {
+        loginButtonLabel: 'Odoslať nové heslo',
+        forgottenPasswordLabel: 'Spať na prihlásenie',
+      };
+    }
+
+    return {
+      loginButtonLabel: 'Prihlásenie',
+      forgottenPasswordLabel: 'Zabudnuté heslo?',
+    };
   }
 
   render() {
-    const { email, emailError, isForgottenPassword, passwordError } = this.state;
+    const { email, emailError, isForgottenPassword, isOpen, passwordError } = this.state;
+    const { loginButtonLabel, forgottenPasswordLabel } = this.getButtonLabels();
+
     return (
       <div className="wrapper">
         <div className="border">
@@ -93,7 +140,7 @@ class LoginPage extends Component {
             floatingLabelStyle={styles.floatingLabelStyle}
           />
           {
-            isForgottenPassword && <TextField
+            !isForgottenPassword && <TextField
               id="heslo"
               errorText={passwordError}
               onChange={this.handlePasswordChange}
@@ -104,19 +151,42 @@ class LoginPage extends Component {
               floatingLabelStyle={styles.floatingLabelStyle}
             />
           }
-          </div>
-          <div className="button">
             <RaisedButton
               onClick={this.handleLogin}
-              label="Prihlás"
+              label={loginButtonLabel}
               overlayStyle={styles.overlayStyle}
               fullWidth
+              style={{ marginTop: 40 }}
             />
+          {
+            <FlatButton
+              onClick={this.handleForgottenPassword}
+              label={forgottenPasswordLabel}
+              fullWidth
+              style={{ marginTop: 10 }}
+            />
+          }
           </div>
         </div>
+        <Snackbar
+          open={isOpen}
+          message="Nové heslo bolo odoslané na zadaný e-mail"
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     );
   }
 }
 
-export default LoginPage;
+const mapStateToProps = state => {
+  const { user } = state;
+
+  return {
+    user: getUser(user),
+    isUserError: isUserError(user),
+    isUserFetching: isUserFetching(user),
+  };
+}
+
+export default connect(mapStateToProps, { fetchUser })(LoginPage);
