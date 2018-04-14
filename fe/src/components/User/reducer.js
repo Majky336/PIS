@@ -2,6 +2,7 @@ import {
   USER_FETCH,
   USER_FAILURE,
   USER_SUCCESS,
+  USER_RESET,
 } from './actions';
 
 const initialState = {
@@ -11,7 +12,6 @@ const initialState = {
 };
 
 export const userReducer = (state = initialState, action) => {
-console.log(action);
   switch (action.type) {
     case USER_FETCH:
       return {
@@ -30,6 +30,10 @@ console.log(action);
         isFetching: false,
         user: action.payload,
         error: null,
+      };
+    case USER_RESET:
+      return {
+        initialState,
       };
     default:
       return state;

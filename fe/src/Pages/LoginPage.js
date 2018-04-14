@@ -57,11 +57,11 @@ class LoginPage extends Component {
   validateEmail = () => {
     const { email } = this.state;
 
-    if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      this.setState({ emailError: 'Nesprávny formát' });
-    } else {
-      this.setState({ emailError: '' });
-    }
+    // if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    //   this.setState({ emailError: 'Nesprávny formát' });
+    // } else {
+    //   this.setState({ emailError: '' });
+    // }
   }
 
   validatePassword = () => {
@@ -76,7 +76,7 @@ class LoginPage extends Component {
 
   handleLogin = () => {
     const { email, password, isForgottenPassword } = this.state;
-    const { fetchUser } = this.props;
+    const { fetchUser, history } = this.props;
 
     if (!email) {
       return this.setState({ emailError: 'Toto pole je povinné' });
@@ -87,7 +87,12 @@ class LoginPage extends Component {
     }
 
     if (!isForgottenPassword) {
-      fetchUser({email, password});
+      fetchUser({
+        email,
+        heslo: password,
+      }).then(
+        () => { history.push('/user')}
+      );
     }
 
     if (isForgottenPassword) {
@@ -98,7 +103,11 @@ class LoginPage extends Component {
   handleForgottenPassword = () => {
     const { isForgottenPassword } = this.state;
 
-    this.setState({ isForgottenPassword: !isForgottenPassword });
+    this.setState({
+      isForgottenPassword: !isForgottenPassword,
+      emailError: '',
+      passwordError: '',
+    });
   }
 
   getButtonLabels = () => {

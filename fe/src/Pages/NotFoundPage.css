@@ -1,0 +1,7 @@
+.alert {
+  background-color: rgba(244, 223, 66, 0.4);
+  border-radius: 10px;
+  padding-bottom: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
+}

@@ -1,8 +1,11 @@
 import { api } from '../../api/api';
 
-export const USER_FAILURE = 'USER_FAILURE';
+export const USER_FAILURE = 'USER.FAILURE';
 export const USER_FETCH = 'USER.FETCH';
-export const USER_SUCCESS = 'USER_SUCCESS';
+export const USER_SUCCESS = 'USER.SUCCESS';
+export const USER_RESET = 'USER.RESET';
+
+export const userReset = () => ({ type: USER_RESET });
 
 export const userFetch = () => ({ type: USER_FETCH });
 
@@ -20,7 +23,11 @@ export const fetchUser = credentials => dispatch => {
   dispatch(userFetch());
 
   return api.post('/api/login/', credentials).then(
-    response => {dispatch(userSuccess(response.data)); console.log(response);},
+    response => dispatch(userSuccess(response.data)),
     error => dispatch(userFailure(error)),
   );
 }
+
+export const resetUser = () => dispatch => {
+  dispatch(userReset());
+};
