@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { colors } from '../StyleConstants/Styles';
 import { fetchUser } from '../components/User/actions';
@@ -57,11 +58,11 @@ class LoginPage extends Component {
   validateEmail = () => {
     const { email } = this.state;
 
-    // if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-    //   this.setState({ emailError: 'Nesprávny formát' });
-    // } else {
-    //   this.setState({ emailError: '' });
-    // }
+    if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      this.setState({ emailError: 'Nesprávny formát' });
+    } else {
+      this.setState({ emailError: '' });
+    }
   }
 
   validatePassword = () => {
@@ -76,7 +77,7 @@ class LoginPage extends Component {
 
   handleLogin = () => {
     const { email, password, isForgottenPassword } = this.state;
-    const { fetchUser, history } = this.props;
+    const { fetchUser } = this.props;
 
     if (!email) {
       return this.setState({ emailError: 'Toto pole je povinné' });
@@ -90,9 +91,7 @@ class LoginPage extends Component {
       fetchUser({
         email,
         heslo: password,
-      }).then(
-        () => { history.push('/user')}
-      );
+      })
     }
 
     if (isForgottenPassword) {
@@ -128,7 +127,13 @@ class LoginPage extends Component {
 
   render() {
     const { email, emailError, isForgottenPassword, isOpen, passwordError } = this.state;
+    const { user, location } = this.props;
+    const { from } = location.state || { from: { pathname: '/user' }};
     const { loginButtonLabel, forgottenPasswordLabel } = this.getButtonLabels();
+
+    if (user) {
+      return <Redirect to={from} />;
+    }
 
     return (
       <div className="wrapper">

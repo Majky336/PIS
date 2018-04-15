@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import AppRoot from './AppRoot';
 import store from './Redux/configureStore';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 class App extends Component {
   render() {
     return (

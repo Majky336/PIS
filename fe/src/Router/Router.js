@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import BookListPage from './Pages/BookListPage';
-import Header from './components/Header';
-import LoginPage from './Pages/LoginPage';
-import NotFoundPage from './Pages/NotFoundPage';
-import ProfilePage from './Pages/ProfilePage';
+import BookListPage from '../Pages/BookListPage';
+import Header from '../components/Header';
+import HomePage from '../Pages/HomePage';
+import LoginPage from '../Pages/LoginPage';
+import NotFoundPage from '../Pages/NotFoundPage';
+import PrivateRoute from './PrivateRoute';
+import ProfilePage from '../Pages/ProfilePage';
 
-import { getUser } from './components/User/reducer';
-import { resetUser } from './components/User/actions';
+import { getUser } from '../components/User/reducer';
+import { resetUser } from '../components/User/actions';
 
 class Router extends Component {
-
   handleLogOut = () => {
     const { resetUser } = this.props;
 
@@ -28,15 +29,15 @@ class Router extends Component {
           {
             user && <Header
               handleLogOut={this.handleLogOut}
-              handleProfile={this.handleProfile}
               resetUser={resetUser}
               user={user}
             />
           }
           <Switch>
-            <Route exact path="/" component={LoginPage} />
-            <Route exact path="/user" component={BookListPage} />
-            <Route exact path="/profil" component={ProfilePage} />
+            <Route path="/login" component={LoginPage} />
+            <PrivateRoute exact path='/' component={HomePage}  user={user}/>
+            <PrivateRoute exact path='/books' component={BookListPage} user={user} />
+            <PrivateRoute exact path='/profil' component={ProfilePage}  user={user}/>
             <Route path="*" component={NotFoundPage} />}
           </Switch>
         </div>

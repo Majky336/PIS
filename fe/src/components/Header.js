@@ -53,13 +53,17 @@ const Logged = props => {
 };
 
 class Header extends Component {
+  handleProfile = () => {
+
+  }
+
   render() {
     const { user, handleLogOut, handleProfile } = this.props;
     const { name } = user || '';
 
     return (
       <AppBar
-        iconElementLeft={<Logged handleProfile={handleProfile} handleLogOut={handleLogOut} />}
+        iconElementLeft={<Logged handleProfile={this.handleProfile} handleLogOut={handleLogOut} />}
         iconElementRight={ <FlatButton label={name} disabled />}
         title='Uber Duper Mega Knižný Výpožičkový Systém'
         style={{ backgroundColor: colors.primary }}
