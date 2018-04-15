@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using WebApi.Domain.Factory;
 using WebApi.Domain.ServiceRepositories;
 using WebApi.Models.ViewModels;
 
@@ -10,6 +11,11 @@ namespace WebApi.Controllers
         protected virtual EmailServiceRepository ResolveEmailServiceRepository()
         {
             return new EmailServiceRepository();
+        }
+
+        protected virtual PouzivatelServiceRepository ResolvePouzivatelServiceRepository()
+        {
+            return new PouzivatelServiceRepository(new PouzivatelFactory());
         }
 
         // POST: api/ForgottenPassword
@@ -26,7 +32,7 @@ namespace WebApi.Controllers
                 newPassword += random.Next(9).ToString();
             }
 
-            
+            ResolvePouzivatelServiceRepository().UpdatePouzivatel(forgottenPassword.email, newPassword);
             ResolveEmailServiceRepository().SendEmail(forgottenPassword.email, newPassword);
         }
     }
