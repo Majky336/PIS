@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:ns="http://labss2.fiit.stuba.sk/pis/notificationservices/email/types" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://labss2.fiit.stuba.sk/pis/notificationservices/email" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Email" targetNamespace="http://labss2.fiit.stuba.sk/pis/notificationservices/email" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://labss2.fiit.stuba.sk/pis/notificationservices/email/types" targetNamespace="http://labss2.fiit.stuba.sk/pis/notificationservices/email/types">
+      <xsd:complexType name="notify">
+        <xsd:sequence>
+          <xsd:element name="team_id" type="xsd:string" />
+          <xsd:element name="password" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="subject" type="xsd:string" />
+          <xsd:element name="message" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="notify" nillable="true" type="ns:notify" />
+      <xsd:complexType name="notifyResponse">
+        <xsd:sequence>
+          <xsd:element name="success" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="notifyResponse" nillable="true" type="ns:notifyResponse" />
+      <xsd:complexType name="getPrice">
+        <xsd:sequence>
+          <xsd:element name="amount" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getPrice" nillable="true" type="ns:getPrice" />
+      <xsd:complexType name="getPriceResponse">
+        <xsd:sequence>
+          <xsd:element name="price" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getPriceResponse" nillable="true" type="ns:getPriceResponse" />
+    </xsd:schema>
+  </types>
+  <message name="notifyRequest">
+    <part name="parameters" element="ns:notify" />
+  </message>
+  <message name="notifyResponse">
+    <part name="parameters" element="ns:notifyResponse" />
+  </message>
+  <message name="getPriceRequest">
+    <part name="parameters" element="ns:getPrice" />
+  </message>
+  <message name="getPriceResponse">
+    <part name="parameters" element="ns:getPriceResponse" />
+  </message>
+  <portType name="EmailPortType">
+    <operation name="notify">
+      <input message="tns:notifyRequest" />
+      <output message="tns:notifyResponse" />
+    </operation>
+    <operation name="getPrice">
+      <input message="tns:getPriceRequest" />
+      <output message="tns:getPriceResponse" />
+    </operation>
+  </portType>
+  <binding name="EmailBinding" type="tns:EmailPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="notify">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/notificationservices/email/#notify" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/notificationservices/email" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/notificationservices/email" />
+      </output>
+    </operation>
+    <operation name="getPrice">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/notificationservices/email/#getPrice" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/notificationservices/email" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/notificationservices/email" />
+      </output>
+    </operation>
+  </binding>
+  <service name="EmailService">
+    <port name="EmailPort" binding="tns:EmailBinding">
+      <soap:address location="http://labss2.fiit.stuba.sk/pis/ws/NotificationServices/Email" />
+    </port>
+  </service>
+</definitions>

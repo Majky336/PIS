@@ -9,7 +9,7 @@ namespace WebApi.Domain
         public string GetJson(Object T)
         {
             var js = new JavaScriptSerializer();
-            string result = js.Serialize(T);
+            var result = js.Serialize(T);
             return result;
         }
     }

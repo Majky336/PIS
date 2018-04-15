@@ -1,37 +1,35 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using WebApi.Domain;
-using WebApi.Models;
-using WebApi.PouzivatelService;
+using WebApi.Domain.Factory;
+using WebApi.Domain.ServiceRepositories;
+using WebApi.Models.ViewModels;
 
 namespace WebApi.Controllers
 {
 
     public class LoginController : ApiController
     {
-        public virtual JsonSerializer GetJsonSerializer()
+        protected virtual JsonSerializer ResolveJsonSerializer()
         {
             return new JsonSerializer();
+        }
+
+        protected virtual PouzivatelServiceRepository ResolvePouzivatelServiceRepository()
+        {
+            return new PouzivatelServiceRepository(new PouzivatelFactory());
         }
 
         // POST: api/Login
         //POST: "/login" - Params: e-mail-string, heslo-string - Return: user-Pouzivatel || null 
         [HttpPost]
-        //public HttpResponseMessage Login(string email, string heslo)
-        public HttpResponseMessage Login(LoginModel o)
+        public HttpResponseMessage Login(LoginViewModel o)
         {
-            var service = new Team024PouzivatelPortTypeClient();
+            var user = ResolvePouzivatelServiceRepository().GetPouzivatel(o.email, o.heslo);
 
-            var result = service.getByAttributeValue("email", o.email, new int?[] { });
-
-            var pouzivatel = result.FirstOrDefault(user => user.heslo == o.heslo);
-
-            var json = GetJsonSerializer().GetJson(pouzivatel);
+            var json = ResolveJsonSerializer().GetJson(user);
 
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(json, Encoding.UTF8, "application/json");
