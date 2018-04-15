@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import format from 'date-fns/format';
 
 import { getUser } from '../components/User/reducer';
+import { parseDate } from '../lib/Parsers';
 import './ProfilePage.css';
 
 
@@ -31,6 +32,9 @@ class ProfilePage extends Component {
     const { user } = this.props;
     const { name, poslednePrihlasenie, email, body, datRegistracie } = user || {};
 
+    const posPrihlasenieTimestamp = parseDate(poslednePrihlasenie);
+    const datRegistracieTimestamp = parseDate(datRegistracie);
+
     return (
       <div className='container-fluid'>
         <div className='col-md-6 offset-md-3 title'>
@@ -47,7 +51,7 @@ class ProfilePage extends Component {
               </TableRow>
               <TableRow>
                 <TableRowColumn style={styles.rowTitle}>Dátum registrácie</TableRowColumn>
-                <TableRowColumn>{format(datRegistracie, 'DD MM YYYY')}</TableRowColumn>
+                <TableRowColumn>{format(datRegistracieTimestamp, 'DD-MM-YYYY')}</TableRowColumn>
               </TableRow>
               <TableRow>
                 <TableRowColumn style={styles.rowTitle}>Body</TableRowColumn>
@@ -55,7 +59,7 @@ class ProfilePage extends Component {
               </TableRow>
               <TableRow>
                 <TableRowColumn style={styles.rowTitle}>Posledné prihlásenie</TableRowColumn>
-                <TableRowColumn>{poslednePrihlasenie}</TableRowColumn>
+                <TableRowColumn>{format(posPrihlasenieTimestamp, 'DD-MM-YYYY HH:mm')}</TableRowColumn>
               </TableRow>
             </TableBody>
           </Table>

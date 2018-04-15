@@ -51,7 +51,7 @@ class BookListPage extends Component {
       }
 
       return (
-        <TableRow style={style}>
+        <TableRow style={style} key={name}>
           <TableRowColumn>{name}</TableRowColumn>
           <TableRowColumn>{autor}</TableRowColumn>
           <TableRowColumn>{zaner}</TableRowColumn>
