@@ -32,8 +32,8 @@ namespace WebApi.Controllers
                 newPassword += random.Next(9).ToString();
             }
 
-            ResolvePouzivatelServiceRepository().UpdatePouzivatel(forgottenPassword.email, newPassword);
-            ResolveEmailServiceRepository().SendEmail(forgottenPassword.email, newPassword);
+            ResolvePouzivatelServiceRepository().UpdatePouzivatel(forgottenPassword.Email, newPassword);
+            ResolveEmailServiceRepository().SendEmail(forgottenPassword.Email, newPassword);
         }
     }
 }

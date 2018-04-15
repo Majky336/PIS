@@ -27,7 +27,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage Login(LoginViewModel o)
         {
-            var user = ResolvePouzivatelServiceRepository().GetPouzivatel(o.email, o.heslo);
+            var user = ResolvePouzivatelServiceRepository().GetPouzivatel(o.Email, o.Heslo);
 
             var json = ResolveJsonSerializer().GetJson(user);
 
