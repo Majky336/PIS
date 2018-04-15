@@ -8,6 +8,7 @@ import { Redirect } from 'react-router-dom';
 
 import { colors } from '../StyleConstants/Styles';
 import { fetchUser } from '../components/User/actions';
+import { sendEmailWithNewPassword } from '../components/ForgottenPassword/actions';
 import { isUserError, isUserFetching, getUser } from '../components/User/reducer';
 import './LoginPage.css';
 
@@ -77,10 +78,16 @@ class LoginPage extends Component {
 
   handleLogin = () => {
     const { email, password, isForgottenPassword } = this.state;
-    const { fetchUser } = this.props;
+    const { fetchUser, sendEmailWithNewPassword } = this.props;
 
     if (!email) {
       return this.setState({ emailError: 'Toto pole je povinné' });
+    }
+
+    if (isForgottenPassword) {
+      return sendEmailWithNewPassword({ email }).then(() => {
+        this.setState({ isOpen: true });
+      });
     }
 
     if (!password) {
@@ -92,10 +99,6 @@ class LoginPage extends Component {
         email,
         heslo: password,
       })
-    }
-
-    if (isForgottenPassword) {
-      this.setState({ isOpen: true });
     }
   }
 
@@ -203,4 +206,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps, { fetchUser })(LoginPage);
+export default connect(mapStateToProps, { fetchUser, sendEmailWithNewPassword })(LoginPage);

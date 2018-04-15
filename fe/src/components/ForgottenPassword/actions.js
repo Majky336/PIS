@@ -16,10 +16,10 @@ export const forgottenPasswordFailure = error => ({
   error,
 });
 
-export const sendEmailWithNewPassword = credentials => dispatch => {
+export const sendEmailWithNewPassword = email => dispatch => {
   dispatch(forgottenPasswordFetch());
 
-  return api.post('/api/forgottenPassword/', credentials).then(
+  return api.post('/api/ForgottenPassword/', email).then(
     response => dispatch(forgottenPasswordSuccess(response.data)),
     error => dispatch(forgottenPasswordFailure(error)),
   );
