@@ -12,6 +12,9 @@ namespace WebApi.Controllers
             return new EmailServiceRepository();
         }
 
+        // POST: api/ForgottenPassword
+        // POST: "/forgottenPassword" - Params: email-string - Return: void
+        [HttpPost]
         public void ForgottenPassword(ForgottenPasswordViewModel forgottenPassword)
         {
             var random = new Random();
