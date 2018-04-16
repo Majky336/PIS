@@ -14,18 +14,11 @@ namespace WebApi.Domain.ServiceRepositories
             _pouzivatelFactory = pouzivatelFactory;
         }
 
-        public void UpdatePouzivatel(string email, string newPassword)
+        public string GetPouzivatelHeslo(string email)
         {
             var user = GetPouzivatels(email).FirstOrDefault();
 
-            if (user == null)
-            {
-                return;
-            }
-
-            user.heslo = newPassword;
-
-            SaveUpdatedPouzivatel(user);
+            return user?.heslo;
         }
 
         public List<Pouzivatels> GetPouzivatels(string email)

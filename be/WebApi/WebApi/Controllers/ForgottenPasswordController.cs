@@ -23,17 +23,12 @@ namespace WebApi.Controllers
         [HttpPost]
         public void ForgottenPassword(ForgottenPasswordViewModel forgottenPassword)
         {
-            var random = new Random();
+            var password = ResolvePouzivatelServiceRepository().GetPouzivatelHeslo(forgottenPassword.Email);
 
-            var newPassword = string.Empty;
+            if (password == null)
+                return;
 
-            for (var i = 0; i < 8; i++)
-            {
-                newPassword += random.Next(9).ToString();
-            }
-
-            ResolvePouzivatelServiceRepository().UpdatePouzivatel(forgottenPassword.Email, newPassword);
-            ResolveEmailServiceRepository().SendEmail(forgottenPassword.Email, newPassword);
+            ResolveEmailServiceRepository().SendEmail(forgottenPassword.Email, password);
         }
     }
 }

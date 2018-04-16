@@ -8,7 +8,7 @@ namespace WebApi.Domain.ServiceRepositories
         {
             var service = new EmailPortTypeClient();
 
-            var message = $"Vaše nové heslo je {email}";
+            var message = $"Vaše heslo je {email}";
 
             service.notify("024", "FYmoj1", email, "Nové heslo", message);
 
