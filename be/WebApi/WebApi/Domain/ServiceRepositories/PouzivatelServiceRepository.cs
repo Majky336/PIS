@@ -20,7 +20,7 @@ namespace WebApi.Domain.ServiceRepositories
 
             user.heslo = newPassword;
 
-            SavePouzivatel(user);
+            SaveUpdatedPouzivatel(user);
         }
 
         public List<Pouzivatels> GetPouzivatels(string email)
@@ -41,7 +41,7 @@ namespace WebApi.Domain.ServiceRepositories
             return result;
         }
 
-        public void SavePouzivatel(Pouzivatels pouzivatels)
+        public void SaveUpdatedPouzivatel(Pouzivatels pouzivatels)
         {
             var service = new Team024PouzivatelPortTypeClient();
 

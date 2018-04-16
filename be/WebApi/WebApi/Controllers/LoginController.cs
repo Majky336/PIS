@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
@@ -27,13 +28,28 @@ namespace WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage Login(LoginViewModel o)
         {
-            var user = ResolvePouzivatelServiceRepository().GetPouzivatel(o.Email, o.Heslo);
+            var pouzivatelServiceRepository = ResolvePouzivatelServiceRepository();
+            var user = pouzivatelServiceRepository.GetPouzivatel(o.Email, o.Heslo);
 
-            var json = ResolveJsonSerializer().GetJson(user);
+            var jsonSerializer = ResolveJsonSerializer();
 
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            response.Content = new StringContent(json, Encoding.UTF8, "application/json");
-            return response;
+            if (user != null)
+            {
+                user.poslednePrihlasenie = DateTime.Now;
+
+                pouzivatelServiceRepository.SaveUpdatedPouzivatel(user);
+
+                var json = jsonSerializer.GetJson(user);
+                var goodResponse = Request.CreateResponse(HttpStatusCode.OK);
+                goodResponse.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                return goodResponse;
+            }
+
+            var message = jsonSerializer.GetJson("Prihlasovacie meno alebo heslo je nesprávne.");
+
+            var badResponse = Request.CreateResponse(HttpStatusCode.NotFound);
+            badResponse.Content = new StringContent(message, Encoding.UTF8, "application/json");
+            return badResponse;
         }
     }
 }
