@@ -10,8 +10,11 @@ import {
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 
+import Loader from '../components/Loader';
 import { colors } from '../StyleConstants/Styles';
 import { getUser } from '../components/User/reducer';
+import { fetchBookList } from '../components/BookList/actions';
+import { getBookList, isBookListFetching, getBookListError } from '../components/BookList/reducer';
 
 const mockBooks = [
   {
@@ -41,6 +44,12 @@ const mockBooks = [
 ];
 
 class BookListPage extends Component {
+  componentDidMount = () => {
+    const { fetchBookList } = this.props;
+
+    fetchBookList();
+  }
+
   renderTableRow = () => {
     return mockBooks.map((book, index) => {
       const { name, autor, ISBN, zaner, popis, rokVydania } = book;
@@ -64,6 +73,12 @@ class BookListPage extends Component {
   }
 
   render() {
+    const { isBookListFetching } = this.props;
+
+    if (isBookListFetching) {
+      return <Loader />;
+    }
+
     return (
       <div>
         <div className='container-fluid'>
@@ -95,15 +110,18 @@ class BookListPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { user } = state;
+  const { bookList, user } = state;
 
   return {
     user: getUser(user),
+    bookList: getBookList(bookList),
+    isBookListFetching: isBookListFetching(bookList),
+    bookListError: getBookListError(bookList),
   };
 }
 
 const mapDispatchToProps = {
-
+  fetchBookList,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookListPage);

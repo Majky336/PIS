@@ -23,7 +23,7 @@ const styles = {
 }
 
 const Logged = props => {
-  const { handleProfile, handleLogOut } = props;
+  const { handleLogOut } = props;
 
   return (
     <IconMenu
@@ -40,7 +40,6 @@ const Logged = props => {
       <MenuItem
         leftIcon={<PermIdentity />}
         primaryText="Profil"
-        onClick={handleProfile}
       />
       <Divider />
       <MenuItem
@@ -53,17 +52,17 @@ const Logged = props => {
 };
 
 class Header extends Component {
-  handleProfile = () => {
-
-  }
+  // handleProfile = () => {
+  //
+  // }
 
   render() {
-    const { user, handleLogOut, handleProfile } = this.props;
+    const { user, handleLogOut } = this.props;
     const { name } = user || '';
 
     return (
       <AppBar
-        iconElementLeft={<Logged handleProfile={this.handleProfile} handleLogOut={handleLogOut} />}
+        iconElementLeft={<Logged handleLogOut={handleLogOut} />}
         iconElementRight={ <FlatButton label={name} disabled />}
         title='Uber Duper Mega Knižný Výpožičkový Systém'
         style={{ backgroundColor: colors.primary }}

@@ -175,14 +175,12 @@ class LoginPage extends Component {
               fullWidth
               style={{ marginTop: 40 }}
             />
-          {
             <FlatButton
               onClick={this.handleForgottenPassword}
               label={forgottenPasswordLabel}
               fullWidth
               style={{ marginTop: 10 }}
             />
-          }
           </div>
         </div>
         <Snackbar
