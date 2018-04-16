@@ -97,3 +97,4 @@ D:\PIS - code\PIS\be\WebApi\WebApi\obj\Release\WebApi.csproj.CoreCompileInputs.c
 D:\PIS - code\PIS\be\WebApi\WebApi\obj\Release\WebApi.csproj.CopyComplete
 D:\PIS - code\PIS\be\WebApi\WebApi\obj\Release\WebApi.dll
 D:\PIS - code\PIS\be\WebApi\WebApi\obj\Release\WebApi.pdb
+D:\PIS - code\PIS\be\WebApi\WebApi\obj\Release\WebApi.csprojResolveAssemblyReference.cache

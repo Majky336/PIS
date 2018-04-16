@@ -3,3 +3,5 @@
 ################################################################################
 
 /be/WebApi/.vs/WebApi/v15
+/be/WebApi/WebApi/obj/Release/Package/PackageTmp/bin
+/be/WebApi/WebApi/obj/Release/Package

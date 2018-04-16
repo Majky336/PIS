@@ -18,6 +18,11 @@ namespace WebApi.Domain.ServiceRepositories
         {
             var user = GetPouzivatels(email).FirstOrDefault();
 
+            if (user == null)
+            {
+                return;
+            }
+
             user.heslo = newPassword;
 
             SaveUpdatedPouzivatel(user);
