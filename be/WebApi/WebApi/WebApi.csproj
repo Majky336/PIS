@@ -185,26 +185,46 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Connected Services\EmailService\Reference.cs">
+    <Compile Include="Connected Services\BookWsdlService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\PouzivatelService\Reference.cs">
+    <Compile Include="Connected Services\EmailWsdlService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PouzivatelWsdlService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\VytlacokWsdlReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\ForgottenPasswordController.cs" />
+    <Compile Include="Domain\Factory\BookViewModelFactory.cs" />
+    <Compile Include="Domain\Factory\Interface\IBookViewModelFactory.cs" />
     <Compile Include="Domain\Factory\Interface\IPouzivatelFactory.cs" />
     <Compile Include="Domain\Factory\PouzivatelFactory.cs" />
+    <Compile Include="Domain\ServiceRepositories\KnihaServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\EmailServiceRepository.cs" />
+    <Compile Include="Domain\ServiceRepositories\Interfaces\IKnihaServiceRepository.cs" />
+    <Compile Include="Domain\ServiceRepositories\Interfaces\IVytlacokServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\PouzivatelServiceRepository.cs" />
+    <Compile Include="Domain\ServiceRepositories\VytlacokServiceRepository.cs" />
+    <Compile Include="Domain\Services\BookService.cs" />
+    <Compile Include="Domain\Services\Interfaces\IBookService.cs" />
+    <Compile Include="Models\ViewModels\BookViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgottenPasswordViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Domain\JsonSerializer.cs" />
+    <Compile Include="Domain\Services\JsonSerializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,22 +233,89 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <None Include="Connected Services\EmailService\Email.wsdl" />
-    <Content Include="Connected Services\EmailService\WebApi.EmailService.getPriceResponse.datasource">
+    <None Include="Connected Services\BookWsdlService\Team024Kniha.wsdl" />
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.deleteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\EmailService\WebApi.EmailService.notifyResponse.datasource">
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.getAllResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\PouzivatelService\configuration91.svcinfo" />
-    <None Include="Connected Services\PouzivatelService\configuration.svcinfo" />
-    <None Include="Connected Services\PouzivatelService\Reference.svcmap">
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.getByAttributeValueResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.getByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.getByNumericConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.insertResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.Kniha.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.Knihas.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.updateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\EmailWsdlService\Email.wsdl" />
+    <None Include="Connected Services\BookWsdlService\configuration91.svcinfo" />
+    <None Include="Connected Services\BookWsdlService\configuration.svcinfo" />
+    <None Include="Connected Services\BookWsdlService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\EmailService\configuration91.svcinfo" />
-    <None Include="Connected Services\EmailService\configuration.svcinfo" />
-    <None Include="Connected Services\EmailService\Reference.svcmap">
+    <Content Include="Connected Services\EmailWsdlService\WebApi.EmailWsdlService.getPriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\EmailWsdlService\WebApi.EmailWsdlService.notifyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\PouzivatelWsdlService\configuration91.svcinfo" />
+    <None Include="Connected Services\PouzivatelWsdlService\configuration.svcinfo" />
+    <None Include="Connected Services\PouzivatelWsdlService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\EmailWsdlService\configuration91.svcinfo" />
+    <None Include="Connected Services\EmailWsdlService\configuration.svcinfo" />
+    <None Include="Connected Services\EmailWsdlService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.deleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.getAllResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.getByAttributeValueResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.getByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.getByNumericConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.insertResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.Pouzivatel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.Pouzivatels.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PouzivatelWsdlService\WebApi.PouzivatelWsdlService.updateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\VytlacokWsdlReference\configuration91.svcinfo" />
+    <None Include="Connected Services\VytlacokWsdlReference\configuration.svcinfo" />
+    <None Include="Connected Services\VytlacokWsdlReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -261,37 +348,39 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\PouzivatelService\Team024Pouzivatel.wsdl" />
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.deleteResponse.datasource">
+    <None Include="Connected Services\PouzivatelWsdlService\Team024Pouzivatel.wsdl" />
+    <None Include="Connected Services\VytlacokWsdlReference\Team024Vytlacok.wsdl" />
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.deleteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.getAllResponse.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.getAllResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.getByAttributeValueResponse.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.getByAttributeValueResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.getByIdResponse.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.getByIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.getByNumericConditionResponse.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.getByNumericConditionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.insertResponse.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.insertResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.Pouzivatel.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.updateResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.Pouzivatels.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.Vytlacok.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\PouzivatelService\WebApi.PouzivatelService.updateResponse.datasource">
+    <Content Include="Connected Services\VytlacokWsdlReference\WebApi.VytlacokWsdlReference.Vytlacoks.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\pisapi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -335,8 +424,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\EmailService\" />
-    <WCFMetadataStorage Include="Connected Services\PouzivatelService\" />
+    <WCFMetadataStorage Include="Connected Services\BookWsdlService\" />
+    <WCFMetadataStorage Include="Connected Services\EmailWsdlService\" />
+    <WCFMetadataStorage Include="Connected Services\PouzivatelWsdlService\" />
+    <WCFMetadataStorage Include="Connected Services\VytlacokWsdlReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

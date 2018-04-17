@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebApi.Domain.Factory.Interface;
-using WebApi.PouzivatelService;
+using WebApi.PouzivatelWsdlService;
 
 namespace WebApi.Domain.ServiceRepositories
 {

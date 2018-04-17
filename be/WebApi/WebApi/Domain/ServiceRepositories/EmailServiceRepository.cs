@@ -1,4 +1,4 @@
-﻿using WebApi.EmailService;
+﻿using WebApi.EmailWsdlService;
 
 namespace WebApi.Domain.ServiceRepositories
 {

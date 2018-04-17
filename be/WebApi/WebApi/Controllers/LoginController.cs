@@ -6,6 +6,7 @@ using System.Web.Http;
 using WebApi.Domain;
 using WebApi.Domain.Factory;
 using WebApi.Domain.ServiceRepositories;
+using WebApi.Domain.Services;
 using WebApi.Models.ViewModels;
 
 namespace WebApi.Controllers
@@ -45,7 +46,7 @@ namespace WebApi.Controllers
                 return goodResponse;
             }
 
-            var message = jsonSerializer.GetJson("Prihlasovacie meno alebo heslo je nesprávne.");
+            var message = jsonSerializer.GetJson("Prihlasovacie meno alebo heslo je nesprávne");
 
             var badResponse = Request.CreateResponse(HttpStatusCode.NotFound);
             badResponse.Content = new StringContent(message, Encoding.UTF8, "application/json");

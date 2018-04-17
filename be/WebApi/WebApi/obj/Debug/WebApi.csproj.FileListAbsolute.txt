@@ -184,7 +184,6 @@ D:\PIS - code\PIS\be\WebApi\WebApi\bin\Microsoft.AI.DependencyCollector.xml
 D:\PIS - code\PIS\be\WebApi\WebApi\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\PIS - code\PIS\be\WebApi\WebApi\bin\Microsoft.AI.WindowsServer.xml
 D:\PIS - code\PIS\be\WebApi\WebApi\bin\Microsoft.AI.Web.xml
-D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
 D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\WebApi.csproj.CoreCompileInputs.cache
 D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\WebApi.csproj.CopyComplete
 D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\WebApi.dll

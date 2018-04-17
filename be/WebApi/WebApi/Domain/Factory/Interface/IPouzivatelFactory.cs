@@ -1,4 +1,4 @@
-﻿using WebApi.PouzivatelService;
+﻿using WebApi.PouzivatelWsdlService;
 
 namespace WebApi.Domain.Factory.Interface
 {
