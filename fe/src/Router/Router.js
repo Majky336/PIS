@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import BookDetailPage from '../Pages/BookDetailPage';
 import BookListPage from '../Pages/BookListPage';
 import Header from '../components/Header';
 import HomePage from '../Pages/HomePage';
@@ -38,6 +39,7 @@ class Router extends Component {
             <PrivateRoute exact path='/' component={HomePage}  user={user}/>
             <PrivateRoute exact path='/books' component={BookListPage} user={user} />
             <PrivateRoute exact path='/profil' component={ProfilePage}  user={user}/>
+            <PrivateRoute exact path='/bookDetail/:id' component={BookDetailPage}  user={user}/>
             <Route path="*" component={NotFoundPage} />}
           </Switch>
         </div>

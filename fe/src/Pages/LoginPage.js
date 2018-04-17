@@ -77,8 +77,8 @@ class LoginPage extends Component {
   }
 
   handleLogin = () => {
-    const { email, password, isForgottenPassword } = this.state;
-    const { fetchUser, sendEmailWithNewPassword } = this.props;
+    const { email, emailError, password, isForgottenPassword } = this.state;
+    const { fetchUser, sendEmailWithNewPassword, userError } = this.props;
 
     if (!email) {
       return this.setState({ emailError: 'Toto pole je povinné' });
@@ -93,7 +93,7 @@ class LoginPage extends Component {
     if (!password) {
       return this.setState({ passwordError: 'Toto pole je povinné' });
     }
-
+    //&& !emailerror
     if (!isForgottenPassword) {
       fetchUser({
         email,
@@ -129,8 +129,10 @@ class LoginPage extends Component {
   }
 
   render() {
-    const { email, emailError, isForgottenPassword, isOpen, passwordError } = this.state;
-    const { user, location } = this.props;
+    const { email, emailError, isForgottenPassword, isOpen, password, passwordError } = this.state;
+    const { user, location, userError } = this.props;
+    const { response } = userError || {};
+    const { data } = response || {};
     const { from } = location.state || { from: { pathname: '/user' }};
     const { loginButtonLabel, forgottenPasswordLabel } = this.getButtonLabels();
 
@@ -145,35 +147,37 @@ class LoginPage extends Component {
             <h1>Prihlásenie</h1>
           </div>
           <div className="form-wrapper">
-          <TextField
-            id="email"
-            errorText={emailError}
-            onChange={this.handleEmailChange}
-            hintText="meno@email.com"
-            floatingLabelText="Email"
-            value={email}
-            underlineStyle={styles.underlineStyle}
-            underlineFocusStyle={styles.underlineStyle}
-            floatingLabelStyle={styles.floatingLabelStyle}
-          />
-          {
-            !isForgottenPassword && <TextField
-              id="heslo"
-              errorText={passwordError}
-              onChange={this.handlePasswordChange}
-              floatingLabelText="Heslo"
-              type="password"
+            <TextField
+              id="email"
+              errorText={emailError}
+              onChange={this.handleEmailChange}
+              hintText="meno@email.com"
+              floatingLabelText="Email"
+              value={email}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
               floatingLabelStyle={styles.floatingLabelStyle}
             />
-          }
+            {
+              !isForgottenPassword && <TextField
+                id="heslo"
+                errorText={passwordError}
+                onChange={this.handlePasswordChange}
+                value={password}
+                floatingLabelText="Heslo"
+                type="password"
+                underlineStyle={styles.underlineStyle}
+                underlineFocusStyle={styles.underlineStyle}
+                floatingLabelStyle={styles.floatingLabelStyle}
+              />
+            }
+            {data && <div style={{fontSize: 12, marginTop: 25, color: 'red'}}>{data}</div>}
             <RaisedButton
               onClick={this.handleLogin}
               label={loginButtonLabel}
               overlayStyle={styles.overlayStyle}
               fullWidth
-              style={{ marginTop: 40 }}
+              style={{ marginTop: 20 }}
             />
             <FlatButton
               onClick={this.handleForgottenPassword}
@@ -199,7 +203,7 @@ const mapStateToProps = state => {
 
   return {
     user: getUser(user),
-    isUserError: isUserError(user),
+    userError: isUserError(user),
     isUserFetching: isUserFetching(user),
   };
 }
