@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import BookDetailPage from '../Pages/BookDetailPage';
 import BookListPage from '../Pages/BookListPage';
+import ErrorDetailPage from '../Pages/ErrorDetailPage';
+import ErrorListPage from '../Pages/ErrorListPage';
 import Header from '../components/Header';
 import HomePage from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
@@ -36,11 +38,13 @@ class Router extends Component {
           }
           <Switch>
             <Route path="/login" component={LoginPage} />
-            <PrivateRoute exact path='/' component={HomePage}  user={user}/>
+            <PrivateRoute exact path='/' component={HomePage} user={user} />
             <PrivateRoute exact path='/books' component={BookListPage} user={user} />
-            <PrivateRoute exact path='/profil' component={ProfilePage}  user={user}/>
-            <PrivateRoute exact path='/bookDetail/:id' component={BookDetailPage}  user={user}/>
-            <Route path="*" component={NotFoundPage} />}
+            <PrivateRoute exact path='/errors/:id' component={ErrorDetailPage} user={user} />
+            <PrivateRoute exact path='/errors' component={ErrorListPage} user={user} />
+            <PrivateRoute exact path='/profil' component={ProfilePage} user={user} />
+            <PrivateRoute exact path='/books/:id' component={BookDetailPage} user={user}/>
+            <Route path="*" component={NotFoundPage} />
           </Switch>
         </div>
       </BrowserRouter>

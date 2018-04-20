@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import Loader from '../components/Loader';
 import { colors } from '../StyleConstants/Styles';
 import { fetchUser } from '../components/User/actions';
 import { sendEmailWithNewPassword } from '../components/ForgottenPassword/actions';
@@ -130,10 +131,10 @@ class LoginPage extends Component {
 
   render() {
     const { email, emailError, isForgottenPassword, isOpen, password, passwordError } = this.state;
-    const { user, location, userError } = this.props;
+    const { user, location, userError, isUserFetching } = this.props;
     const { response } = userError || {};
     const { data } = response || {};
-    const { from } = location.state || { from: { pathname: '/user' }};
+    const { from } = location.state || { from: { pathname: '/books' }};
     const { loginButtonLabel, forgottenPasswordLabel } = this.getButtonLabels();
 
     if (user) {
@@ -171,6 +172,7 @@ class LoginPage extends Component {
                 floatingLabelStyle={styles.floatingLabelStyle}
               />
             }
+            {isUserFetching && <Loader mode='login'/>}
             {data && <div style={{fontSize: 12, marginTop: 25, color: 'red'}}>{data}</div>}
             <RaisedButton
               onClick={this.handleLogin}

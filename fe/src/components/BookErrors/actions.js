@@ -1,10 +1,10 @@
 import { api } from '../../api/api';
 
 export const BOOKERRORS_FAILURE = 'BOOKERRORS.FAILURE';
-export const BOOKERRORS_FETCH = 'BOOKERRORS.FETCH';
+export const BOOKERRORS_CREATE= 'BOOKERRORS.CREATE';
 export const BOOKERRORS_SUCCESS = 'BOOKERRORS.SUCCESS';
 
-export const bookErrorsFetch = () => ({ type: BOOKERRORS_FETCH });
+export const bookErrorsCreate = () => ({ type: BOOKERRORS_CREATE });
 
 export const bookErrorsSuccess = payload => ({
   type: BOOKERRORS_SUCCESS,
@@ -17,7 +17,7 @@ export const bookErrorsFailure = error => ({
 });
 
 export const createBookErrors = errors => dispatch => {
-  dispatch(bookErrorsFetch());
+  dispatch(bookErrorsCreate());
 
   return api.post('/api/errors/', errors).then(
     response => dispatch(bookErrorsSuccess(response.data)),

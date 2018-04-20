@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Snackbar from 'material-ui/Snackbar';
 import format from 'date-fns/format';
 import { connect } from 'react-redux';
 
@@ -22,9 +23,6 @@ const styles = {
   underlineStyle: {
     borderColor: colors.contrast,
   },
-  underlineFocusStyle: {
-
-  },
 };
 
 class BookDetailPage extends Component {
@@ -45,11 +43,12 @@ class BookDetailPage extends Component {
       ReleaseFormat: '',
       YearOfPublication: '',
       isEdit: false,
+      isOpen: false,
     };
   }
 
   componentDidMount() {
-    const { location, history } = this.props;
+    const { location } = this.props;
     const { state } = location;
     const { detail } = state || {};
     const {
@@ -108,7 +107,7 @@ class BookDetailPage extends Component {
             NewValue: this.state[property],
             PropertyName: property,
           };
-        } else if( property === 'isEdit' ) {
+        } else if( property === 'isEdit' || property === 'isOpen' ) {
           return null;
         } else {
           return {
@@ -121,7 +120,9 @@ class BookDetailPage extends Component {
         }
       });
 
-      createBookErrors(errors);
+      createBookErrors(errors).then(() => {
+        this.setState({ isOpen: true });
+      });
     }
 
     this.setState({ isEdit: !isEdit });
@@ -136,8 +137,11 @@ class BookDetailPage extends Component {
     }
   }
 
+  handleRequestClose = () => {
+    this.setState({ isOpen: false });
+  }
+
   handleChange = event => {
-    let { errorsArray } = this.state;
     const { target } = event;
     const { id, value } = target;
 
@@ -150,12 +154,12 @@ class BookDetailPage extends Component {
     const {
       Author,
       BindingType,
-      BookName,
       CopyName,
       Description,
       Genre,
       ISBN,
       isEdit,
+      isOpen,
       Language,
       NumberOfPages,
       Publishers,
@@ -166,7 +170,7 @@ class BookDetailPage extends Component {
     const getEditButtonLabel = isEdit ? 'Odoslať zmeny' : 'Navrhnúť zmeny';
 
     return (
-      <div className='container-fluid'>
+      <div className='container-fluid' style={{fontFamily: 'Roboto'}}>
         <div className='row'>
           <div className='col-sm-10 offset-sm-1 chose'>
             <h1>{CopyName}</h1>
@@ -340,14 +344,23 @@ class BookDetailPage extends Component {
             />
           </div>
         </div>
-        <div className='col-sm-10 offset-sm-1' style={{ marginTop: 20}}>
-          <RaisedButton label='Späť' onClick={this.handleBack} />
-          <RaisedButton
-            label={getEditButtonLabel}
-            onClick={this.handleEdit}
-            overlayStyle={styles.editButtonStyle}
-          />
+        <div className='row'>
+          <div className='col-sm-4 offset-sm-3' style={{ marginTop: 20, display: 'flex' }}>
+            <RaisedButton
+              style={{ marginRight: 20  }}
+              label={getEditButtonLabel}
+              onClick={this.handleEdit}
+              overlayStyle={styles.editButtonStyle}
+            />
+            <RaisedButton label='Späť' onClick={this.handleBack} />
+          </div>
         </div>
+        <Snackbar
+          open={isOpen}
+          message="Návrh na zmenu údajov bol úspešne zaznamenaný"
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     );
   }

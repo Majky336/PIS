@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import PermIdentity from 'material-ui/svg-icons/action/perm-identity';
+import Search from 'material-ui/svg-icons/action/search';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
+import { withRouter } from "react-router-dom";
 
 import { colors } from '../StyleConstants/Styles';
 
@@ -23,7 +24,8 @@ const styles = {
 }
 
 const Logged = props => {
-  const { handleLogOut } = props;
+  const { handleBooks, handleProfile, handleLogOut, user } = props;
+  const { rola } = user || 1;
 
   return (
     <IconMenu
@@ -38,10 +40,16 @@ const Logged = props => {
       targetOrigin={styles.targetOrigin}
     >
       <MenuItem
-        leftIcon={<PermIdentity />}
-        primaryText="Profil"
+        leftIcon={<Search />}
+        primaryText={'Knihy'}
+        onClick={handleBooks}
       />
-      <Divider />
+      { !rola && <MenuItem
+          leftIcon={<PermIdentity />}
+          primaryText="Profil"
+          onClick={handleProfile}
+        />
+      }
       <MenuItem
         leftIcon={<PowerSettingsNew />}
         primaryText="Odhlásiť sa"
@@ -52,9 +60,17 @@ const Logged = props => {
 };
 
 class Header extends Component {
-  // handleProfile = () => {
-  //
-  // }
+  handleProfile = () => {
+    const { history } = this.props;
+
+    history.push('/profil');
+  }
+
+  handleBooks = () => {
+    const { history } = this.props;
+
+    history.push('/books');
+  }
 
   render() {
     const { user, handleLogOut } = this.props;
@@ -62,7 +78,14 @@ class Header extends Component {
 
     return (
       <AppBar
-        iconElementLeft={<Logged handleLogOut={handleLogOut} />}
+        iconElementLeft={
+          <Logged
+            handleBooks={this.handleBooks}
+            handleLogOut={handleLogOut}
+            handleProfile={this.handleProfile}
+            user={user}
+          />
+        }
         iconElementRight={ <FlatButton label={name} disabled />}
         title='Uber Duper Mega Knižný Výpožičkový Systém'
         style={{ backgroundColor: colors.primary }}
@@ -71,4 +94,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

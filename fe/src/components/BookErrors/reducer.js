@@ -1,5 +1,5 @@
 import {
-  BOOKERRORS_FETCH,
+  BOOKERRORS_CREATE,
   BOOKERRORS_FAILURE,
   BOOKERRORS_SUCCESS,
 } from './actions';
@@ -11,7 +11,7 @@ const initialState = {
 
 export const bookErrorsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case BOOKERRORS_FETCH:
+    case BOOKERRORS_CREATE:
       return {
         ...state,
         created: false,
