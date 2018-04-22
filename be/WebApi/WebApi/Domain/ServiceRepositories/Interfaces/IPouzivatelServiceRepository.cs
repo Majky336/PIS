@@ -9,6 +9,7 @@ namespace WebApi.Domain.ServiceRepositories.Interfaces
         string GetPouzivatelHeslo(string email);
         List<Pouzivatels> GetPouzivatels(string email);
         void SaveUpdatedPouzivatel(Pouzivatels pouzivatels);
+        void SaveUpdatedPouzivatel(Pouzivatel pouzivatel);
         Pouzivatel GetPouzivatelById(int id);
     }
 }

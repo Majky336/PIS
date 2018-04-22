@@ -7,5 +7,6 @@ namespace WebApi.Domain.ServiceRepositories.Interfaces
     {
         List<Vytlacoks> GetAll();
         Vytlacok GetById(int id);
+        void UpdateVytlacok(Vytlacok vytlacok);
     }
 }

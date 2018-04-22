@@ -28,5 +28,14 @@ namespace WebApi.Domain.ServiceRepositories
 
             return result;
         }
+
+        public void UpdateVytlacok(Vytlacok vytlacok)
+        {
+            var service = new Team024VytlacokPortTypeClient();
+
+            service.update("024", "FYmoj1", vytlacok.id, vytlacok);
+
+            service.Close();
+        }
     }
 }

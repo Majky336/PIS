@@ -44,11 +44,16 @@ namespace WebApi.Domain.ServiceRepositories
 
         public void SaveUpdatedPouzivatel(Pouzivatels pouzivatels)
         {
-            var service = new Team024PouzivatelPortTypeClient();
-
             var user = _pouzivatelFactory.GetPouzivatel(pouzivatels);
 
-            service.update("024", "FYmoj1", pouzivatels.id, user);
+            SaveUpdatedPouzivatel(user);
+        }
+
+        public void SaveUpdatedPouzivatel(Pouzivatel pouzivatel)
+        {
+            var service = new Team024PouzivatelPortTypeClient();
+
+            service.update("024", "FYmoj1", pouzivatel.id, pouzivatel);
 
             service.Close();
         }

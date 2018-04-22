@@ -7,5 +7,6 @@ namespace WebApi.Domain.ServiceRepositories.Interfaces
     {
         List<Knihas> GetAll();
         Kniha GetById(int id);
+        void UpdateKniha(Kniha kniha);
     }
 }

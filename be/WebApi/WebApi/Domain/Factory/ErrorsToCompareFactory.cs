@@ -6,9 +6,9 @@ namespace WebApi.Domain.Factory
 {
     public class ErrorsToCompareFactory : IErrorsToCompareFactory
     {
-        public ErrorsToCompare CreateErrorToCompare(Chybas error)
+        public ErrorToCompare CreateErrorToCompare(Chybas error)
         {
-            var result = new ErrorsToCompare
+            var result = new ErrorToCompare
             {
                 OldValue = error.staryUdaj,
                 NewValue = error.novyUdaj,

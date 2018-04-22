@@ -17,10 +17,8 @@ namespace WebApi.Domain.Services
         private readonly IErrorViewModelFactory _errorViewModelFactory;
         private readonly IPouzivatelServiceRepository _pouzivatelServiceRepository;
 
-        public ErrorService(IErrorServiceRepository errorServiceRepository, IChybaFactory chybaFactory,
-            ISendMailService sendMailService, IKnihaServiceRepository knihaServiceRepository,
-            IVytlacokServiceRepository vytlacokServiceRepository, IErrorViewModelFactory errorViewModelFactory,
-            IPouzivatelServiceRepository pouzivatelServiceRepository)
+        public ErrorService(IErrorServiceRepository errorServiceRepository, IChybaFactory chybaFactory, ISendMailService sendMailService, IKnihaServiceRepository knihaServiceRepository,
+            IVytlacokServiceRepository vytlacokServiceRepository, IErrorViewModelFactory errorViewModelFactory, IPouzivatelServiceRepository pouzivatelServiceRepository)
         {
             _errorServiceRepository = errorServiceRepository;
             _chybaFactory = chybaFactory;

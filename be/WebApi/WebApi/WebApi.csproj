@@ -213,6 +213,7 @@
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ForgottenPasswordController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Domain\Factory\BookViewModelFactory.cs" />
     <Compile Include="Domain\Factory\ChybaFactory.cs" />
     <Compile Include="Domain\Factory\ErrorsToCompareFactory.cs" />
@@ -238,9 +239,11 @@
     <Compile Include="Domain\Services\Interfaces\IErrorService.cs" />
     <Compile Include="Domain\Services\Interfaces\IBookService.cs" />
     <Compile Include="Domain\Services\Interfaces\ISendMailService.cs" />
+    <Compile Include="Domain\Services\IResultService.cs" />
+    <Compile Include="Domain\Services\ResultService.cs" />
     <Compile Include="Domain\Services\SendMailService.cs" />
     <Compile Include="Models\ViewModels\BookViewModel.cs" />
-    <Compile Include="Models\ViewModels\ErrorsToCompare.cs" />
+    <Compile Include="Models\ViewModels\ErrorToCompare.cs" />
     <Compile Include="Models\ViewModels\ErrorViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgottenPasswordViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,6 +255,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\ErrorForSaveViewModel.cs" />
+    <Compile Include="Models\ViewModels\ResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

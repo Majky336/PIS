@@ -8,6 +8,6 @@ namespace WebApi.Models.ViewModels
         public string Name { get; set; }
         public string Isbn { get; set; }
         public DateTime YearOfPublication { get; set; }
-        public List<ErrorsToCompare> Errors { get; set; }
+        public List<ErrorToCompare> Errors { get; set; }
     }
 }

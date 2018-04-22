@@ -25,5 +25,25 @@ namespace WebApi.Domain.Factory
 
             return result;
         }
+
+        public Chyba GetChyba(Chybas chyba, int adminId)
+        {
+            var result = new Chyba
+            {
+                id = chyba.id,
+                vytlacok_id = chyba.vytlacok_id,
+                pouzivatel_id = chyba.pouzivatel_id,
+                name = chyba.name,
+                novyUdaj = chyba.novyUdaj,
+                staryUdaj = chyba.staryUdaj,
+                datZalozenia = chyba.datZalozenia,
+                potvrdena = chyba.potvrdena,
+                vyhodnotena = chyba.vyhodnotena,
+                admin_id = adminId,
+                datVyhodnotenia = DateTime.Now
+            };
+
+            return result;
+        }
     }
 }

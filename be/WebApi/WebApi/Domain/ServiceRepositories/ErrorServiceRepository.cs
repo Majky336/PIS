@@ -26,5 +26,25 @@ namespace WebApi.Domain.ServiceRepositories
 
             return result.ToList();
         }
+
+        public List<Chybas> GetErrorsByCopyId(int id)
+        {
+            var service = new Team024ChybaPortTypeClient();
+
+            var result = service.getByAttributeValue("vytlacok_id", id.ToString(), new int?[]{});
+
+            service.Close();
+
+            return result.ToList();
+        }
+
+        public void UpdateError(Chyba chyba)
+        {
+            var service = new Team024ChybaPortTypeClient();
+
+            service.update("024", "FYmoj1", chyba.id, chyba);
+
+            service.Close();
+        }
     }
 }

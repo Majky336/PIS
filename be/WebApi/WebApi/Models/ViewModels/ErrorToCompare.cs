@@ -1,6 +1,6 @@
 ﻿namespace WebApi.Models.ViewModels
 {
-    public class ErrorsToCompare
+    public class ErrorToCompare
     {
         public int UserId { get; set; }
         public int CopyId { get; set; }

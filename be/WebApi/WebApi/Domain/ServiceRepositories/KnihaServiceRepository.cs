@@ -28,5 +28,14 @@ namespace WebApi.Domain.ServiceRepositories
 
             return result;
         }
+
+        public void UpdateKniha(Kniha kniha)
+        {
+            var service = new Team024KnihaPortTypeClient();
+
+            service.update("024", "FYmoj1", kniha.id, kniha);
+
+            service.Close();
+        }
     }
 }

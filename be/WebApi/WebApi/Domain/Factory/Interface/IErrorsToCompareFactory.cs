@@ -5,6 +5,6 @@ namespace WebApi.Domain.Factory.Interface
 {
     public interface IErrorsToCompareFactory
     {
-        ErrorsToCompare CreateErrorToCompare(Chybas error);
+        ErrorToCompare CreateErrorToCompare(Chybas error);
     }
 }
