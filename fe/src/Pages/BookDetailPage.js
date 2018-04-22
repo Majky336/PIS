@@ -36,7 +36,7 @@ class BookDetailPage extends Component {
       CopyName: '',
       Description: '',
       Genre: '',
-      ISBN: '',
+      Isbn: '',
       Language: '',
       NumberOfPages: 0,
       Publishers: '',
@@ -58,7 +58,7 @@ class BookDetailPage extends Component {
       CopyName,
       Description,
       Genre,
-      ISBN,
+      Isbn,
       Language,
       NumberOfPages,
       Publishers,
@@ -75,7 +75,7 @@ class BookDetailPage extends Component {
       CopyName,
       Description,
       Genre,
-      ISBN,
+      Isbn,
       Language,
       NumberOfPages,
       Publishers,
@@ -157,7 +157,7 @@ class BookDetailPage extends Component {
       CopyName,
       Description,
       Genre,
-      ISBN,
+      Isbn,
       isEdit,
       isOpen,
       Language,
@@ -229,9 +229,9 @@ class BookDetailPage extends Component {
           </div>
           <div className='col-sm-5'>
             <TextField
-              id={'ISBN'}
+              id={'Isbn'}
               disabled={!isEdit}
-              value={ISBN}
+              value={Isbn}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
               onChange={this.handleChange}
