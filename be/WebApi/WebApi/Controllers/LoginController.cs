@@ -3,9 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using WebApi.Domain;
 using WebApi.Domain.Factory;
 using WebApi.Domain.ServiceRepositories;
+using WebApi.Domain.ServiceRepositories.Interfaces;
 using WebApi.Domain.Services;
 using WebApi.Models.ViewModels;
 
@@ -19,7 +19,7 @@ namespace WebApi.Controllers
             return new JsonSerializer();
         }
 
-        protected virtual PouzivatelServiceRepository ResolvePouzivatelServiceRepository()
+        protected virtual IPouzivatelServiceRepository ResolvePouzivatelServiceRepository()
         {
             return new PouzivatelServiceRepository(new PouzivatelFactory());
         }

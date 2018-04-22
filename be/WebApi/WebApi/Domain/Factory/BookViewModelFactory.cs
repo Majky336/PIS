@@ -13,7 +13,7 @@ namespace WebApi.Domain.Factory
             {
                 CopyId = vytlacok.id,
                 Author = kniha.autor,
-                ISBN = kniha.ISBN,
+                Isbn = kniha.ISBN,
                 BookName = kniha.name,
                 Description = kniha.popis,
                 Genre = kniha.zaner,

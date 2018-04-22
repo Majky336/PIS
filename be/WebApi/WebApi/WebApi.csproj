@@ -226,6 +226,7 @@
     <Compile Include="Domain\ServiceRepositories\ErrorServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\IEmailServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\Interfaces\IErrorServiceRepository.cs" />
+    <Compile Include="Domain\ServiceRepositories\Interfaces\IPouzivatelServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\KnihaServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\EmailServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\Interfaces\IKnihaServiceRepository.cs" />
@@ -236,6 +237,8 @@
     <Compile Include="Domain\Services\ErrorService.cs" />
     <Compile Include="Domain\Services\Interfaces\IErrorService.cs" />
     <Compile Include="Domain\Services\Interfaces\IBookService.cs" />
+    <Compile Include="Domain\Services\Interfaces\ISendMailService.cs" />
+    <Compile Include="Domain\Services\SendMailService.cs" />
     <Compile Include="Models\ViewModels\BookViewModel.cs" />
     <Compile Include="Models\ViewModels\ErrorsToCompare.cs" />
     <Compile Include="Models\ViewModels\ErrorViewModel.cs" />

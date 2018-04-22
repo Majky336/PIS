@@ -2,8 +2,8 @@
 {
     public class ErrorForSaveViewModel
     {
-        public int UserID { get; set; }
-        public int CopyID { get; set; }
+        public int UserId { get; set; }
+        public int CopyId { get; set; }
         public string OldValue { get; set; }
         public string NewValue { get; set; }
         public string PropertyName { get; set; }

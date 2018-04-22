@@ -7,6 +7,6 @@ namespace WebApi.Domain.Factory.Interface
 {
     public interface IErrorViewModelFactory
     {
-        ErrorViewModel CreatErrorViewModel(string name, string ISBN, DateTime yearOfPublication, List<Chybas> errors);
+        ErrorViewModel CreatErrorViewModel(string name, string isbn, DateTime yearOfPublication, List<Chybas> errors);
     }
 }

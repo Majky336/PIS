@@ -11,8 +11,8 @@ namespace WebApi.Domain.Factory
         {
             var result = new Chyba
             {
-                vytlacok_id = errorForSaveViewModel.CopyID,
-                pouzivatel_id = errorForSaveViewModel.UserID,
+                vytlacok_id = errorForSaveViewModel.CopyId,
+                pouzivatel_id = errorForSaveViewModel.UserId,
                 name = errorForSaveViewModel.PropertyName,
                 novyUdaj = errorForSaveViewModel.NewValue,
                 staryUdaj = errorForSaveViewModel.OldValue,

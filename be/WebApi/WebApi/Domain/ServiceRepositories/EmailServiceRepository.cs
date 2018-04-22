@@ -1,24 +1,16 @@
-﻿using WebApi.ChybaWsdlService;
-using WebApi.EmailWsdlService;
+﻿using WebApi.EmailWsdlService;
 
 namespace WebApi.Domain.ServiceRepositories
 {
     public class EmailServiceRepository : IEmailServiceRepository
     {
-        public void SendEmail(string email, string heslo)
+        public void SendEmail(string email, string subject, string message)
         {
             var service = new EmailPortTypeClient();
 
-            var message = $"Vaše heslo je {email}";
-
-            service.notify("024", "FYmoj1", email, "Nové heslo", message);
+            service.notify("024", "FYmoj1", email, subject, message);
 
             service.Close();
-        }
-
-        public void SendEmail(string email, Chybas[] errors)
-        {
-
         }
     }
 }

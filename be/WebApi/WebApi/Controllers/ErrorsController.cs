@@ -15,7 +15,10 @@ namespace WebApi.Controllers
     {
         protected virtual IErrorService ResolveErrorService()
         {
-            return new ErrorService(new ErrorServiceRepository(), new ChybaFactory(), new EmailServiceRepository(), new KnihaServiceRepository(), new VytlacokServiceRepository(), new ErrorViewModelFactory(new ErrorsToCompareFactory()));
+            return new ErrorService(new ErrorServiceRepository(), new ChybaFactory(),
+                new SendMailService(new EmailServiceRepository()), new KnihaServiceRepository(),
+                new VytlacokServiceRepository(), new ErrorViewModelFactory(new ErrorsToCompareFactory()),
+                new PouzivatelServiceRepository(new PouzivatelFactory()));
         }
 
         protected virtual JsonSerializer ResolveJsonSerializer()

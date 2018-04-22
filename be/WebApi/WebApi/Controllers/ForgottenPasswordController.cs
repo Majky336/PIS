@@ -1,19 +1,21 @@
-﻿using System;
-using System.Web.Http;
+﻿using System.Web.Http;
 using WebApi.Domain.Factory;
 using WebApi.Domain.ServiceRepositories;
+using WebApi.Domain.ServiceRepositories.Interfaces;
+using WebApi.Domain.Services;
+using WebApi.Domain.Services.Interfaces;
 using WebApi.Models.ViewModels;
 
 namespace WebApi.Controllers
 {
     public class ForgottenPasswordController : ApiController
     {
-        protected virtual EmailServiceRepository ResolveEmailServiceRepository()
+        protected virtual ISendMailService ResolveSendMailService()
         {
-            return new EmailServiceRepository();
+            return new SendMailService(new EmailServiceRepository());
         }
 
-        protected virtual PouzivatelServiceRepository ResolvePouzivatelServiceRepository()
+        protected virtual IPouzivatelServiceRepository ResolvePouzivatelServiceRepository()
         {
             return new PouzivatelServiceRepository(new PouzivatelFactory());
         }
@@ -28,7 +30,7 @@ namespace WebApi.Controllers
             if (password == null)
                 return;
 
-            ResolveEmailServiceRepository().SendEmail(forgottenPassword.Email, password);
+            ResolveSendMailService().SendEmail(forgottenPassword.Email, password);
         }
     }
 }

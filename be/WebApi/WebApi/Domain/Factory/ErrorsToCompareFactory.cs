@@ -12,8 +12,8 @@ namespace WebApi.Domain.Factory
             {
                 OldValue = error.staryUdaj,
                 NewValue = error.novyUdaj,
-                UserID = error.pouzivatel_id,
-                CopyID = error.vytlacok_id,
+                UserId = error.pouzivatel_id,
+                CopyId = error.vytlacok_id,
                 PropertyName = error.name
             };
 

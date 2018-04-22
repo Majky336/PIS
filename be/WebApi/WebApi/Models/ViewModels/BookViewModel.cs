@@ -7,8 +7,7 @@ namespace WebApi.Models.ViewModels
         public int CopyId { get; set; }
         
         public string BookName { get; set; }
-        // ReSharper disable once InconsistentNaming
-        public string ISBN { get; set; }
+        public string Isbn { get; set; }
         public string Author { get; set; }
         public string Genre { get; set; }
         public string Description { get; set; }

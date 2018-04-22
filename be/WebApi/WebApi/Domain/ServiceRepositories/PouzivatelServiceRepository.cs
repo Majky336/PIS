@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebApi.Domain.Factory.Interface;
+using WebApi.Domain.ServiceRepositories.Interfaces;
 using WebApi.PouzivatelWsdlService;
 
 namespace WebApi.Domain.ServiceRepositories
 {
-    public class PouzivatelServiceRepository
+    public class PouzivatelServiceRepository : IPouzivatelServiceRepository
     {
         private readonly IPouzivatelFactory _pouzivatelFactory;
 
@@ -50,6 +51,17 @@ namespace WebApi.Domain.ServiceRepositories
             service.update("024", "FYmoj1", pouzivatels.id, user);
 
             service.Close();
+        }
+
+        public Pouzivatel GetPouzivatelById(int id)
+        {
+            var service = new Team024PouzivatelPortTypeClient();
+
+            var result = service.getById(id);
+
+            service.Close();
+
+            return result;
         }
     }
 }

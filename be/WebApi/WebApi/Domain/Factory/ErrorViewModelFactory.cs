@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using WebApi.ChybaWsdlService;
 using WebApi.Domain.Factory.Interface;
 using WebApi.Models.ViewModels;
@@ -17,12 +16,12 @@ namespace WebApi.Domain.Factory
             _errorsToCompareFactory = errorsToCompareFactory;
         }
 
-        public ErrorViewModel CreatErrorViewModel(string name, string ISBN, DateTime yearOfPublication,
+        public ErrorViewModel CreatErrorViewModel(string name, string isbn, DateTime yearOfPublication,
             List<Chybas> errors)
         {
             var result = new ErrorViewModel
             {
-                ISBN = ISBN,
+                Isbn = isbn,
                 Name = name,
                 YearOfPublication = yearOfPublication,
                 Errors = errors.Select(er => _errorsToCompareFactory.CreateErrorToCompare(er)).ToList()
