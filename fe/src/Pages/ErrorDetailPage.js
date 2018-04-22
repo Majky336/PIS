@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import ErrorDetail from '../components/ErrorDetail/ErrorDetail';
 import { colors } from '../StyleConstants/Styles';
 import { getUser } from '../components/User/reducer';
+import { getErrorDetailError, isErrorDetailCreated } from '../components/ErrorDetail/reducer';
+import { createErrorDetail } from '../components/ErrorDetail/actions';
 
 const styles = {
   confirmButtonStyle: {
@@ -27,13 +29,28 @@ class ErrorDetailPage extends Component {
     const { errorsList } = state || {};
     const { Errors } = errorsList || {};
 
-    this.setState({ stateErrors: Errors });
+    const stateErrors = Errors.map(error => {
+      return {
+        ...error,
+        isAccepted: false,
+        isChangedByAdmin: false,
+      };
+    });
+
+    this.setState({ stateErrors });
   }
 
   handleBack = () => {
     const { history } = this.props;
 
     history.goBack();
+  }
+
+  handleSubmit = () => {
+    const { stateErrors } = this.state;
+    const { createErrorDetail } = this.props;
+
+    createErrorDetail(stateErrors);
   }
 
   handleAccept = details => {
@@ -50,7 +67,6 @@ class ErrorDetailPage extends Component {
     });
 
     this.setState({ stateErrors: [ ...newStateErrors, details ]});
-
   }
 
   renderError = () => {
@@ -60,13 +76,14 @@ class ErrorDetailPage extends Component {
     const { errorsList } = state || {};
     const { Errors } = errorsList || {};
 
-    return Errors.map(error => {
-      const { NewValue, OldValue, PropertyName, UserID } = error;
+    return Errors.map((error, index) => {
+      const { NewValue, OldValue, PropertyName, UserID, CopyID } = error;
 
       return (
         <ErrorDetail
           adminID={id}
-          key={PropertyName}
+          copyID={CopyID}
+          key={index}
           newValue={NewValue}
           handleAccept={this.handleAccept}
           oldValue={OldValue}
@@ -97,7 +114,12 @@ class ErrorDetailPage extends Component {
         {this.renderError()}
         <div className='row' style={{ marginTop: 20 }}>
           <div className='col-sm-6 offset-sm-1'>
-            <RaisedButton label='Potvrdiť zmeny' style={{ marginRight: 20}} overlayStyle={styles.confirmButtonStyle}/>
+            <RaisedButton
+              label='Potvrdiť zmeny'
+              style={{ marginRight: 20}}
+              overlayStyle={styles.confirmButtonStyle}
+              onClick={this.handleSubmit}
+            />
             <RaisedButton label='Späť' onClick={this.handleBack} />
           </div>
         </div>
@@ -107,11 +129,13 @@ class ErrorDetailPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { user } = state;
+  const { errorDetail, user } = state;
 
   return {
     user: getUser(user),
+    errorDetailError: getErrorDetailError(errorDetail),
+    isErrorDetailCreated: isErrorDetailCreated(errorDetail),
   };
 }
 
-export default connect(mapStateToProps)(ErrorDetailPage);
+export default connect(mapStateToProps, { createErrorDetail })(ErrorDetailPage);

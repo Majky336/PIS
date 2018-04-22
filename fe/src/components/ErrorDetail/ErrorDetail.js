@@ -29,6 +29,7 @@ class ErrorDetail extends Component {
     super(props);
 
     this.state = {
+      isChangedByAdmin: false,
       isChecked: false,
       currentValue: '',
     };
@@ -41,7 +42,8 @@ class ErrorDetail extends Component {
   }
 
   handleChange = event => {
-    const { propertyName } = this.props;
+    const { handleAccept, userID, oldValue, newValue, propertyName, adminID, copyID } = this.props;
+    const { currentValue, isChangedByAdmin, isChecked } = this.state;
     const { target } = event;
     const { value } = target;
 
@@ -50,15 +52,47 @@ class ErrorDetail extends Component {
     } else {
       this.setState({ currentValue: value });
     }
+    
+    if (value === newValue) {
+      this.setState({ isChangedByAdmin: false }, () => {
+        handleAccept({
+          AdminID: adminID,
+          CopyID: copyID,
+          isAccepted: isChecked,
+          isChangedByAdmin,
+          NewValue: currentValue,
+          OldValue: oldValue,
+          PropertyName: propertyName,
+          UserID: userID,
+        });
+      });
+    } else {
+      this.setState({ isChangedByAdmin: true }, () => {
+        handleAccept({
+          AdminID: adminID,
+          CopyID: copyID,
+          isAccepted: isChecked,
+          isChangedByAdmin,
+          NewValue: currentValue,
+          OldValue: oldValue,
+          PropertyName: propertyName,
+          UserID: userID,
+        });
+      });
+    }
   }
 
   handleCheck = (event, isChecked) => {
-    const { handleAccept, userID, oldValue, propertyName, adminID } = this.props;
-    const { currentValue } = this.state;
+    const { handleAccept, userID, oldValue, propertyName, adminID, copyID } = this.props;
+    const { currentValue, isChangedByAdmin } = this.state;
+
+    this.setState({ isChecked });
 
     handleAccept({
       AdminID: adminID,
+      CopyID: copyID,
       isAccepted: isChecked,
+      isChangedByAdmin,
       NewValue: currentValue,
       OldValue: oldValue,
       PropertyName: propertyName,
