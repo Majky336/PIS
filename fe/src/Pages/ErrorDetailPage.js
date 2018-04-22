@@ -33,7 +33,7 @@ class ErrorDetailPage extends Component {
     const stateErrors = Errors.map(error => {
       return {
         ...error,
-        AdminID: id,
+        AdminId: id,
         isAccepted: false,
         isChangedByAdmin: false,
       };
@@ -79,7 +79,7 @@ class ErrorDetailPage extends Component {
     const { Errors } = errorsList || {};
 
     return Errors.map((error, index) => {
-      const { NewValue, OldValue, PropertyName, UserID, CopyId } = error;
+      const { NewValue, OldValue, PropertyName, UserId, CopyId } = error;
 
       return (
         <ErrorDetail
@@ -90,7 +90,7 @@ class ErrorDetailPage extends Component {
           handleAccept={this.handleAccept}
           oldValue={OldValue}
           propertyName={PropertyName}
-          userID={UserID}
+          userID={UserId}
         />
       );
     });

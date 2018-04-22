@@ -52,7 +52,7 @@ class ErrorDetail extends Component {
     } else {
       this.setState({ currentValue: value });
     }
-    
+
     if (value === newValue) {
       this.setState({ isChangedByAdmin: false }, () => {
         handleAccept({
@@ -89,14 +89,14 @@ class ErrorDetail extends Component {
     this.setState({ isChecked });
 
     handleAccept({
-      AdminID: adminID,
-      CopyID: copyID,
+      AdminId: adminID,
+      CopyId: copyID,
       isAccepted: isChecked,
       isChangedByAdmin,
       NewValue: currentValue,
       OldValue: oldValue,
       PropertyName: propertyName,
-      UserID: userID,
+      UserId: userID,
     });
   }
 
