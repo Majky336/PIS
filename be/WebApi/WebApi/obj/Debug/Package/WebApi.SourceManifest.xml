@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <IisApp path="D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\Package\PackageTmp" />
-  <setAcl path="D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
-</sitemanifest>
