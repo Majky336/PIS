@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 class HomePage extends Component {
   render() {
-      return <Redirect push to='/' />;
+      return <Redirect push to='/books' />;
   }
 }
 
