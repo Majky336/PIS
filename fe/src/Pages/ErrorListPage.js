@@ -67,7 +67,7 @@ class ErrorListPage extends Component {
 
     if (errorList && errorList.length) {
       return errorList.map((book, index) => {
-        const { Name, ISBN, YearOfPublication } = book;
+        const { Name, Isbn, YearOfPublication } = book;
         const isOdd = index % 2 === 1;
         const style = {
           backgroundColor: isOdd ? colors.contrast : colors.white,
@@ -78,7 +78,7 @@ class ErrorListPage extends Component {
         return (
           <TableRow key={index} style={style} selected={this.isSelected(index)}>
             <TableRowColumn>{Name}</TableRowColumn>
-            <TableRowColumn>{ISBN}</TableRowColumn>
+            <TableRowColumn>{Isbn}</TableRowColumn>
             <TableRowColumn>{format(YearOfPublicationTimestamp, 'DD-MM-YYYY')}</TableRowColumn>
           </TableRow>
         );
