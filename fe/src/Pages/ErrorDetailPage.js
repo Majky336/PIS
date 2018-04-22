@@ -24,7 +24,8 @@ class ErrorDetailPage extends Component {
   }
 
   componentDidMount() {
-    const { location } = this.props;
+    const { location, user } = this.props;
+    const { id } = user || {};
     const { state } = location;
     const { errorsList } = state || {};
     const { Errors } = errorsList || {};
@@ -32,6 +33,7 @@ class ErrorDetailPage extends Component {
     const stateErrors = Errors.map(error => {
       return {
         ...error,
+        AdminID: id,
         isAccepted: false,
         isChangedByAdmin: false,
       };
@@ -77,12 +79,12 @@ class ErrorDetailPage extends Component {
     const { Errors } = errorsList || {};
 
     return Errors.map((error, index) => {
-      const { NewValue, OldValue, PropertyName, UserID, CopyID } = error;
+      const { NewValue, OldValue, PropertyName, UserID, CopyId } = error;
 
       return (
         <ErrorDetail
           adminID={id}
-          copyID={CopyID}
+          copyID={CopyId}
           key={index}
           newValue={NewValue}
           handleAccept={this.handleAccept}
