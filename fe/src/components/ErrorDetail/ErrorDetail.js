@@ -10,7 +10,7 @@ const properties = {
   CopyName: 'Názov výtlačku',
   Description: 'Popis',
   Genre: 'Žáner',
-  ISBN: 'ISBN',
+  Isbn: 'ISBN',
   Language: 'Jazyk',
   NumberOfPages: 'Počet strán',
   Publishers: 'Vydavateľstvo',
