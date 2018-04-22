@@ -6,5 +6,6 @@ namespace WebApi.Domain.ServiceRepositories.Interfaces
     public interface IKnihaServiceRepository
     {
         List<Knihas> GetAll();
+        Kniha GetById(int id);
     }
 }

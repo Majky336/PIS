@@ -13,7 +13,20 @@ namespace WebApi.Domain.ServiceRepositories
 
             var result = service.getAll();
 
+            service.Close();
+
             return result.ToList();
+        }
+
+        public Vytlacok GetById(int id)
+        {
+            var service = new Team024VytlacokPortTypeClient();
+
+            var result = service.getById(id);
+
+            service.Close();
+
+            return result;
         }
     }
 }

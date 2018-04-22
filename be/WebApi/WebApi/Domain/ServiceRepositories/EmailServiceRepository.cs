@@ -1,8 +1,9 @@
-﻿using WebApi.EmailWsdlService;
+﻿using WebApi.ChybaWsdlService;
+using WebApi.EmailWsdlService;
 
 namespace WebApi.Domain.ServiceRepositories
 {
-    public class EmailServiceRepository
+    public class EmailServiceRepository : IEmailServiceRepository
     {
         public void SendEmail(string email, string heslo)
         {
@@ -13,6 +14,11 @@ namespace WebApi.Domain.ServiceRepositories
             service.notify("024", "FYmoj1", email, "Nové heslo", message);
 
             service.Close();
+        }
+
+        public void SendEmail(string email, Chybas[] errors)
+        {
+
         }
     }
 }

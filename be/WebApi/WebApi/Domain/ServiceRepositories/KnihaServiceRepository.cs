@@ -13,7 +13,20 @@ namespace WebApi.Domain.ServiceRepositories
 
             var result = service.getAll();
 
+            service.Close();
+
             return result.ToList();
+        }
+
+        public Kniha GetById(int id)
+        {
+            var service = new Team024KnihaPortTypeClient();
+
+            var result = service.getById(id);
+
+            service.Close();
+
+            return result;
         }
     }
 }

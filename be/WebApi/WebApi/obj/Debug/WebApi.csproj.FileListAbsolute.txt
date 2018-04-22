@@ -194,3 +194,4 @@ D:\PIS - code\PIS\be\WebApi\WebApi\bin\System.Web.Http.Cors.xml
 D:\PIS - code\PIS\be\WebApi\WebApi\bin\roslyn\System.Collections.Immutable.dll
 D:\PIS - code\PIS\be\WebApi\WebApi\bin\roslyn\System.IO.FileSystem.dll
 D:\PIS - code\PIS\be\WebApi\WebApi\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\PIS - code\PIS\be\WebApi\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache

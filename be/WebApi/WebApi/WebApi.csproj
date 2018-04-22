@@ -190,6 +190,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ChybaWsdlService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\EmailWsdlService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,11 +211,21 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ForgottenPasswordController.cs" />
     <Compile Include="Domain\Factory\BookViewModelFactory.cs" />
+    <Compile Include="Domain\Factory\ChybaFactory.cs" />
+    <Compile Include="Domain\Factory\ErrorsToCompareFactory.cs" />
+    <Compile Include="Domain\Factory\ErrorViewModelFactory.cs" />
+    <Compile Include="Domain\Factory\Interface\IErrorViewModelFactory.cs" />
+    <Compile Include="Domain\Factory\Interface\IErrorsToCompareFactory.cs" />
+    <Compile Include="Domain\Factory\Interface\IChybaFactory.cs" />
     <Compile Include="Domain\Factory\Interface\IBookViewModelFactory.cs" />
     <Compile Include="Domain\Factory\Interface\IPouzivatelFactory.cs" />
     <Compile Include="Domain\Factory\PouzivatelFactory.cs" />
+    <Compile Include="Domain\ServiceRepositories\ErrorServiceRepository.cs" />
+    <Compile Include="Domain\ServiceRepositories\IEmailServiceRepository.cs" />
+    <Compile Include="Domain\ServiceRepositories\Interfaces\IErrorServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\KnihaServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\EmailServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\Interfaces\IKnihaServiceRepository.cs" />
@@ -218,8 +233,12 @@
     <Compile Include="Domain\ServiceRepositories\PouzivatelServiceRepository.cs" />
     <Compile Include="Domain\ServiceRepositories\VytlacokServiceRepository.cs" />
     <Compile Include="Domain\Services\BookService.cs" />
+    <Compile Include="Domain\Services\ErrorService.cs" />
+    <Compile Include="Domain\Services\Interfaces\IErrorService.cs" />
     <Compile Include="Domain\Services\Interfaces\IBookService.cs" />
     <Compile Include="Models\ViewModels\BookViewModel.cs" />
+    <Compile Include="Models\ViewModels\ErrorsToCompare.cs" />
+    <Compile Include="Models\ViewModels\ErrorViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgottenPasswordViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -229,6 +248,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\ErrorForSaveViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,10 +281,44 @@
     <Content Include="Connected Services\BookWsdlService\WebApi.BookWsdlService.updateResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\ChybaWsdlService\Team024Chyba.wsdl" />
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.Chyba.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.Chybas.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.deleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.getAllResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.getByAttributeValueResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.getByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.getByNumericConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.insertResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ChybaWsdlService\WebApi.ChybaWsdlService.updateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\EmailWsdlService\Email.wsdl" />
     <None Include="Connected Services\BookWsdlService\configuration91.svcinfo" />
     <None Include="Connected Services\BookWsdlService\configuration.svcinfo" />
     <None Include="Connected Services\BookWsdlService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ChybaWsdlService\configuration91.svcinfo" />
+    <None Include="Connected Services\ChybaWsdlService\configuration.svcinfo" />
+    <None Include="Connected Services\ChybaWsdlService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -425,6 +479,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\BookWsdlService\" />
+    <WCFMetadataStorage Include="Connected Services\ChybaWsdlService\" />
     <WCFMetadataStorage Include="Connected Services\EmailWsdlService\" />
     <WCFMetadataStorage Include="Connected Services\PouzivatelWsdlService\" />
     <WCFMetadataStorage Include="Connected Services\VytlacokWsdlReference\" />

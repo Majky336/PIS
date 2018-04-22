@@ -27,6 +27,8 @@ namespace WebApi.Domain.ServiceRepositories
 
             var result = service.getByAttributeValue("email", email, new int?[] { });
 
+            service.Close();
+
             return result.ToList();
         }
 
@@ -46,6 +48,8 @@ namespace WebApi.Domain.ServiceRepositories
             var user = _pouzivatelFactory.GetPouzivatel(pouzivatels);
 
             service.update("024", "FYmoj1", pouzivatels.id, user);
+
+            service.Close();
         }
     }
 }

@@ -6,5 +6,6 @@ namespace WebApi.Domain.ServiceRepositories.Interfaces
     public interface IVytlacokServiceRepository
     {
         List<Vytlacoks> GetAll();
+        Vytlacok GetById(int id);
     }
 }
