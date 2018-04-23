@@ -50,9 +50,11 @@ class ErrorDetailPage extends Component {
 
   handleSubmit = () => {
     const { stateErrors } = this.state;
-    const { createErrorDetail } = this.props;
+    const { createErrorDetail, history } = this.props;
 
-    createErrorDetail(stateErrors);
+    createErrorDetail(stateErrors).then(() => {
+      history.goBack();
+    });
   }
 
   handleAccept = details => {

@@ -3,6 +3,7 @@ import {
   USER_FAILURE,
   USER_SUCCESS,
   USER_RESET,
+  USER_ERROR_RESET,
 } from './actions';
 
 const initialState = {
@@ -34,6 +35,11 @@ export const userReducer = (state = initialState, action) => {
     case USER_RESET:
       return {
         initialState,
+      };
+    case USER_ERROR_RESET:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;

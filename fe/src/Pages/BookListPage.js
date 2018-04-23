@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
-import TextField from 'material-ui/TextField';
 import {
   Table,
   TableBody,
@@ -35,6 +35,7 @@ class BookListPage extends Component {
     super(props);
 
     this.state = {
+      autocompleteDataSource: [],
       searchTerm: '',
       selected: [],
       sortIndex: null,
@@ -51,17 +52,29 @@ class BookListPage extends Component {
     }
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const { fetchBookList } = this.props;
 
     fetchBookList();
   }
 
-  handleSearch = event => {
-    const { target } = event;
-    const { value } = target;
+  componentWillReceiveProps(nextProps) {
+    const { bookList } = nextProps;
+    let dataSource = [];
 
-    this.setState({ searchTerm: value });
+    if (bookList && bookList.length) {
+      dataSource = bookList.map(book => {
+        return book.BookName;
+      });
+    }
+
+    let uniqueDataSource = [...new Set(dataSource)];
+
+    this.setState({ autocompleteDataSource: uniqueDataSource });
+  }
+
+  handleSearch = searchTerm => {
+    this.setState({ searchTerm });
   }
 
   handleSort = (event, index, value) => this.setState({ sortIndex: value });
@@ -147,7 +160,7 @@ class BookListPage extends Component {
 
   render() {
     const { isBookListFetching } = this.props;
-    const { searchTerm, sortIndex } = this.state;
+    const { searchTerm, sortIndex, autocompleteDataSource } = this.state;
 
     if (isBookListFetching) {
       return (
@@ -159,25 +172,27 @@ class BookListPage extends Component {
 
     return (
       <div>
-        <div className='container-fluid' style={{fontFamily: 'Roboto'}}>
+        <div className='container-fluid' style={{ fontFamily: 'Roboto' }}>
           <div className='col-sm-10 offset-sm-1 title'>
             <h1>Knihy na vypožičanie</h1>
-            <div className='row' style={{ justifyContent: 'space-between'}}>
-              <TextField
+            <div className='row' style={{ justifyContent: 'flex-start'}}>
+              <AutoComplete
                 id='search'
-                style={{ marginBottom: 30, width: '59%' }}
+                fullWidth
+                style={{ marginBottom: 30 }}
                 floatingLabelText="Vyhľadávanie"
-                value={searchTerm}
-                onChange={this.handleSearch}
+                searchText={searchTerm}
+                dataSource={autocompleteDataSource}
+                onUpdateInput={this.handleSearch}
                 floatingLabelStyle={styles.floatingLabelStyle}
                 underlineStyle={styles.underlineStyle}
                 underlineFocusStyle={styles.underlineStyle}
               />
               <SelectField
                 onChange={this.handleSort}
-                style={{ marginLeft: 10 }}
                 floatingLabelText="Zoradiť podľa"
                 value={sortIndex}
+                selectedMenuItemStyle={{ color: colors.primary}}
               >
                 <MenuItem value={null} primaryText='' />
                 <MenuItem value={1} primaryText='Názvu' />

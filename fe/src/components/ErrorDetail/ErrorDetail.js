@@ -102,7 +102,6 @@ class ErrorDetail extends Component {
 
   render() {
     const { oldValue, propertyName } = this.props;
-    console.log(propertyName);
     const { currentValue } = this.state;
 
     return (

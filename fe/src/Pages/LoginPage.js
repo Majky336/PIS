@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 
 import Loader from '../components/Loader';
 import { colors } from '../StyleConstants/Styles';
-import { fetchUser } from '../components/User/actions';
+import { fetchUser, resetUserError } from '../components/User/actions';
 import { sendEmailWithNewPassword } from '../components/ForgottenPassword/actions';
 import { isUserError, isUserFetching, getUser } from '../components/User/reducer';
 import './LoginPage.css';
@@ -105,12 +105,13 @@ class LoginPage extends Component {
 
   handleForgottenPassword = () => {
     const { isForgottenPassword } = this.state;
+    const { resetUserError } = this.props;
 
     this.setState({
       isForgottenPassword: !isForgottenPassword,
       emailError: '',
       passwordError: '',
-    });
+    }, resetUserError);
   }
 
   getButtonLabels = () => {
@@ -210,4 +211,10 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps, { fetchUser, sendEmailWithNewPassword })(LoginPage);
+const mapDispatchToProps = {
+  fetchUser,
+  resetUserError,
+  sendEmailWithNewPassword,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

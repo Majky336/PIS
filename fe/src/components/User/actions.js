@@ -4,8 +4,11 @@ export const USER_FAILURE = 'USER.FAILURE';
 export const USER_FETCH = 'USER.FETCH';
 export const USER_SUCCESS = 'USER.SUCCESS';
 export const USER_RESET = 'USER.RESET';
+export const USER_ERROR_RESET = 'USER.ERROR.RESET';
 
 export const userReset = () => ({ type: USER_RESET });
+
+export const userErrorReset = () => ({ type: USER_ERROR_RESET });
 
 export const userFetch = () => ({ type: USER_FETCH });
 
@@ -31,3 +34,7 @@ export const fetchUser = credentials => dispatch => {
 export const resetUser = () => dispatch => {
   dispatch(userReset());
 };
+
+export const resetUserError = () => dispatch => {
+  dispatch(userErrorReset());
+}
