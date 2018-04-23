@@ -47,6 +47,15 @@ class BookDetailPage extends Component {
     };
   }
 
+  componentWillMount() {
+    const { history, user } = this.props;
+    const { rola } = user || {};
+
+    if (rola) {
+      history.replace('/errors');
+    }
+  }
+
   componentDidMount() {
     const { location } = this.props;
     const { state } = location;

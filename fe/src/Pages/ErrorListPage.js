@@ -44,13 +44,12 @@ class ErrorListPage extends Component {
 
   handleRowSelection = selectedRow => {
     const { errorList, history } = this.props;
-
     this.setState({
       selected: selectedRow,
     }, () => {
       const index = selectedRow[0];
       history.push({
-        pathname: `/errors/${errorList[index].CopyId}`,
+        pathname: `/errors/${errorList[index].Errors[0].CopyId}`,
         state: { errorsList: errorList[index]},
       });
     });
@@ -100,7 +99,7 @@ class ErrorListPage extends Component {
     return (
       <div>
         <div className='container-fluid' style={{fontFamily: 'Roboto'}}>
-          <div className='col-sm-10 offset-sm-1 title'>
+          <div className='col-sm-10 offset-sm-1 title' style={{ textAlign: 'center' }}>
             <h1>Nahlásené chyby</h1>
             <Table selectable={true} onRowSelection={this.handleRowSelection}>
               <TableHeader displaySelectAll={false}>

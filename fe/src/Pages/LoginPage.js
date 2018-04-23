@@ -79,7 +79,7 @@ class LoginPage extends Component {
 
   handleLogin = () => {
     const { email, emailError, password, isForgottenPassword } = this.state;
-    const { fetchUser, sendEmailWithNewPassword, userError } = this.props;
+    const { fetchUser, sendEmailWithNewPassword } = this.props;
 
     if (!email) {
       return this.setState({ emailError: 'Toto pole je povinné' });
@@ -94,8 +94,8 @@ class LoginPage extends Component {
     if (!password) {
       return this.setState({ passwordError: 'Toto pole je povinné' });
     }
-    //&& !emailerror
-    if (!isForgottenPassword) {
+
+    if (!isForgottenPassword && !emailError) {
       fetchUser({
         email,
         heslo: password,
