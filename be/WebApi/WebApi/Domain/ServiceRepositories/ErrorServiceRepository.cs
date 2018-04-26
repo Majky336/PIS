@@ -46,5 +46,16 @@ namespace WebApi.Domain.ServiceRepositories
 
             service.Close();
         }
+
+        public List<Chybas> GetUserErrors(int userId)
+        {
+            var service = new Team024ChybaPortTypeClient();
+
+            var result = service.getByAttributeValue("pouzivatel_id", userId.ToString(), new int?[] { });
+
+            service.Close();
+
+            return result.ToList();
+        }
     }
 }

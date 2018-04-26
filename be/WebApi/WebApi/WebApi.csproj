@@ -214,10 +214,13 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ForgottenPasswordController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
+    <Compile Include="Controllers\UserErrorHistoryController.cs" />
     <Compile Include="Domain\Factory\BookViewModelFactory.cs" />
     <Compile Include="Domain\Factory\ChybaFactory.cs" />
     <Compile Include="Domain\Factory\ErrorsToCompareFactory.cs" />
     <Compile Include="Domain\Factory\ErrorViewModelFactory.cs" />
+    <Compile Include="Domain\Factory\HistoryErrorFactory.cs" />
+    <Compile Include="Domain\Factory\Interface\IHistoryErrorFactory.cs" />
     <Compile Include="Domain\Factory\Interface\IErrorViewModelFactory.cs" />
     <Compile Include="Domain\Factory\Interface\IErrorsToCompareFactory.cs" />
     <Compile Include="Domain\Factory\Interface\IChybaFactory.cs" />
@@ -239,20 +242,22 @@
     <Compile Include="Domain\Services\Interfaces\IErrorService.cs" />
     <Compile Include="Domain\Services\Interfaces\IBookService.cs" />
     <Compile Include="Domain\Services\Interfaces\ISendMailService.cs" />
-    <Compile Include="Domain\Services\IResultService.cs" />
+    <Compile Include="Domain\Services\Interfaces\IResultService.cs" />
+    <Compile Include="Domain\Services\Interfaces\IUserProfileService.cs" />
     <Compile Include="Domain\Services\ResultService.cs" />
     <Compile Include="Domain\Services\SendMailService.cs" />
+    <Compile Include="Domain\Services\UserProfileService.cs" />
     <Compile Include="Models\ViewModels\BookViewModel.cs" />
     <Compile Include="Models\ViewModels\ErrorToCompare.cs" />
     <Compile Include="Models\ViewModels\ErrorViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgottenPasswordViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Domain\Services\JsonSerializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\HistoryError.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\ErrorForSaveViewModel.cs" />
     <Compile Include="Models\ViewModels\ResultsViewModel.cs" />

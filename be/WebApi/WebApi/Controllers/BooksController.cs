@@ -13,7 +13,7 @@ namespace WebApi.Controllers
     {
         protected virtual IBookService ResolveBookService()
         {
-            return new BookService(new KnihaServiceRepository(), new VytlacokServiceRepository(), new BookViewModelFactory());
+            return new BookService(new KnihaServiceRepository(), new VytlacokServiceRepository(), new BookViewModelFactory(), new ErrorServiceRepository());
         }
 
         protected virtual JsonSerializer ResolveJsonSerializer()

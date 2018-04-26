@@ -9,5 +9,6 @@ namespace WebApi.Domain.ServiceRepositories.Interfaces
         List<Chybas> GerAllErrors();
         List<Chybas> GetErrorsByCopyId(int id);
         void UpdateError(Chyba chyba);
+        List<Chybas> GetUserErrors(int userId);
     }
 }

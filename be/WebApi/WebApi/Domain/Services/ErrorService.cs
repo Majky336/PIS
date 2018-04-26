@@ -48,7 +48,7 @@ namespace WebApi.Domain.Services
         {
             var result = new List<ErrorViewModel>();
 
-            var errors = _errorServiceRepository.GerAllErrors();
+            var errors = _errorServiceRepository.GerAllErrors().Where(er => !er.vyhodnotena).ToList();
 
             var groupedErrors = errors.GroupBy(er => er.vytlacok_id);
 
