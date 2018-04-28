@@ -19,6 +19,7 @@
           <xsd:element name="poslednePrihlasenie" type="xsd:dateTime" />
           <xsd:element name="heslo" type="xsd:string" />
           <xsd:element name="prihlasovacieMeno" type="xsd:string" />
+          <xsd:element name="platneClenske" type="xsd:dateTime" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:element name="Pouzivatel" nillable="true" type="ns:Pouzivatel" />
@@ -57,6 +58,7 @@
           <xsd:element name="poslednePrihlasenie" type="xsd:dateTime" />
           <xsd:element name="heslo" type="xsd:string" />
           <xsd:element name="prihlasovacieMeno" type="xsd:string" />
+          <xsd:element name="platneClenske" type="xsd:dateTime" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:element name="Pouzivatels" nillable="true" type="ns:Pouzivatels" />

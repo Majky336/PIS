@@ -17,7 +17,8 @@ namespace WebApi.Domain.Factory
                 name = pouzivatels.name,
                 poslednePrihlasenie = pouzivatels.datRegistracie,
                 prihlasovacieMeno = pouzivatels.prihlasovacieMeno,
-                rola = pouzivatels.rola
+                rola = pouzivatels.rola,
+                platneClenske = pouzivatels.platneClenske
             };
 
             return result;

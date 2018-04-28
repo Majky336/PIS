@@ -100,6 +100,8 @@ namespace WebApi.PouzivatelWsdlService {
         
         private string prihlasovacieMenoField;
         
+        private System.DateTime platneClenskeField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public int id {
@@ -205,6 +207,18 @@ namespace WebApi.PouzivatelWsdlService {
             set {
                 this.prihlasovacieMenoField = value;
                 this.RaisePropertyChanged("prihlasovacieMeno");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public System.DateTime platneClenske {
+            get {
+                return this.platneClenskeField;
+            }
+            set {
+                this.platneClenskeField = value;
+                this.RaisePropertyChanged("platneClenske");
             }
         }
         
@@ -244,6 +258,8 @@ namespace WebApi.PouzivatelWsdlService {
         
         private string prihlasovacieMenoField;
         
+        private System.DateTime platneClenskeField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public int id {
@@ -349,6 +365,18 @@ namespace WebApi.PouzivatelWsdlService {
             set {
                 this.prihlasovacieMenoField = value;
                 this.RaisePropertyChanged("prihlasovacieMeno");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public System.DateTime platneClenske {
+            get {
+                return this.platneClenskeField;
+            }
+            set {
+                this.platneClenskeField = value;
+                this.RaisePropertyChanged("platneClenske");
             }
         }
         
