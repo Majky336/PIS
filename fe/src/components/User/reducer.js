@@ -4,6 +4,9 @@ import {
   USER_SUCCESS,
   USER_RESET,
   USER_ERROR_RESET,
+  USER_UPDATE_POINTS,
+  USER_UPDATE_POINTS_SUCCESS,
+  USER_UPDATE_POINTS_FAILURE,
 } from './actions';
 
 const initialState = {
@@ -41,6 +44,23 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         error: null,
       };
+    case USER_UPDATE_POINTS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case USER_UPDATE_POINTS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+    case USER_UPDATE_POINTS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        user: action.payload,
+      }
     default:
       return state;
   }

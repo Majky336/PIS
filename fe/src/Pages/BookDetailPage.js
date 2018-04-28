@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import ReactTooltip from 'react-tooltip'
 import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
+import Warning from 'material-ui/svg-icons/alert/warning';
 import format from 'date-fns/format';
 import { connect } from 'react-redux';
 
@@ -60,6 +62,7 @@ class BookDetailPage extends Component {
     const { location } = this.props;
     const { state } = location;
     const { detail } = state || {};
+
     const {
       Author,
       BindingType,
@@ -160,6 +163,10 @@ class BookDetailPage extends Component {
   }
 
   render() {
+    const { location } = this.props;
+    const { state } = location;
+    const { detail } = state || {};
+
     const {
       Author,
       BindingType,
@@ -175,6 +182,19 @@ class BookDetailPage extends Component {
       ReleaseFormat,
       YearOfPublication,
     } = this.state;
+
+    const {
+      IsAuthorAvaliable,
+      IsBindingTypeAvaliable,
+      IsDescriptionAvaliable,
+      IsGenreAvaliable,
+      IsIsbnAvaliable,
+      IsLanguageAvaliable,
+      IsNumberOfPagesAvaliable,
+      IsPublishersAvaliable,
+      IsReleaseFormatAvaliable,
+      IsYearOfPublicationAvaliable,
+    } = detail;
 
     const getEditButtonLabel = isEdit ? 'Odoslať zmeny' : 'Navrhnúť zmeny';
 
@@ -203,13 +223,16 @@ class BookDetailPage extends Component {
           </div>
         }
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsAuthorAvaliable && <Warning data-tip data-for='warning' color='#FCC432'/>}
+          </div>
+          <div className='col-sm-3'>
             <h4>Autor</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'Author'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsAuthorAvaliable)}
               value={Author}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -218,13 +241,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsGenreAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Žáner</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'Genre'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsGenreAvaliable)}
               value={Genre}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -233,13 +259,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsIsbnAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>ISBN</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'Isbn'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsIsbnAvaliable)}
               value={Isbn}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -248,13 +277,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsYearOfPublicationAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Rok vydania</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'YearOfPublication'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsYearOfPublicationAvaliable)}
               value={YearOfPublication}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -263,13 +295,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsDescriptionAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Popis</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'Description'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsDescriptionAvaliable)}
               value={Description}
               multiLine
               underlineStyle={styles.underlineStyle}
@@ -279,13 +314,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsPublishersAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Vydavateľstvo</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'Publishers'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsPublishersAvaliable)}
               value={Publishers}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -294,13 +332,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsLanguageAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Jazyk</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'Language'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsLanguageAvaliable)}
               value={Language}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -309,13 +350,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsBindingTypeAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Typ väzby</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'BindingType'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsBindingTypeAvaliable)}
               value={BindingType}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -324,13 +368,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsReleaseFormatAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Formát</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'ReleaseFormat'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsReleaseFormatAvaliable)}
               value={ReleaseFormat}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -339,13 +386,16 @@ class BookDetailPage extends Component {
           </div>
         </div>
         <div className='row' style={styles.centeredText}>
-          <div className='col-sm-3 offset-sm-2'>
+          <div className='col-sm-1 offset-sm-1'>
+            {!IsNumberOfPagesAvaliable && <Warning data-tip data-for='warning' color='#FCC432' />}
+          </div>
+          <div className='col-sm-3'>
             <h4>Počet strán</h4>
           </div>
           <div className='col-sm-5'>
             <TextField
               id={'NumberOfPages'}
-              disabled={!isEdit}
+              disabled={!(isEdit && IsNumberOfPagesAvaliable)}
               value={NumberOfPages}
               underlineStyle={styles.underlineStyle}
               underlineFocusStyle={styles.underlineStyle}
@@ -353,6 +403,9 @@ class BookDetailPage extends Component {
             />
           </div>
         </div>
+        <ReactTooltip id='warning'>
+          <span>Tento údaj je už nahlásený</span>
+        </ReactTooltip>
         <div className='row'>
           <div className='col-sm-4 offset-sm-3' style={{ marginTop: 20, display: 'flex' }}>
             <RaisedButton

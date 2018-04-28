@@ -8,13 +8,19 @@ import {
   TableHeaderColumn,
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
+import Dialog from 'material-ui/Dialog';
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 import format from 'date-fns/format';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { connect } from 'react-redux';
 
 import Loader from '../components/Loader';
 import { colors } from '../StyleConstants/Styles';
 import { getUser } from '../components/User/reducer';
+import { updateUserPoints } from '../components/User/actions';
 import { getErrorHistory, isErrorHistoryFetching } from '../components/ErrorHistory/reducer';
 import { fetchErrorHistory } from '../components/ErrorHistory/actions';
 import { parseDate } from '../lib/Parsers';
@@ -28,6 +34,16 @@ const styles = {
   centeredText: {
     textAlign: 'center',
   },
+  errorTable: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  overlayButton: {
+    backgroundColor: colors.contrast,
+  }
 };
 
 const properties = {
@@ -45,6 +61,17 @@ const properties = {
 }
 
 class ProfilePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      errorText: '',
+      isDialogOpen: false,
+      sortIndex: null,
+      radioButtonValue: 0,
+    };
+  }
+
   componentDidMount() {
     const { fetchErrorHistory, user } = this.props;
     const { id } = user || 0;
@@ -54,6 +81,7 @@ class ProfilePage extends Component {
 
   renderErrorHistoryTableRow = () => {
     const { errorHistory } = this.props;
+    const { sortIndex } = this.state;
 
     if (!errorHistory || !errorHistory.length) {
       return (
@@ -63,7 +91,20 @@ class ProfilePage extends Component {
       );
     }
 
-    return errorHistory.map((error, index) => {
+    const filteredList = errorHistory.filter(error => {
+      switch (sortIndex) {
+        case 1:
+          return error.Confirmed;
+        case 2:
+          return (!error.Resolved)
+        case 3:
+          return (error.Resolved && !error.Confirmed);
+        default:
+          return true;
+      }
+    })
+
+    return filteredList.map((error, index) => {
       const { Confirmed, CopyName, CreatedAt, Resolved, PropertyName } = error || {};
       const createdAtTimestamp = parseDate(CreatedAt);
 
@@ -76,7 +117,7 @@ class ProfilePage extends Component {
 
       if (Confirmed) {
         color = colors.acceptedGreen;
-        status = 'Vyriešená'
+        status = 'Potvrdená'
       } else if (Resolved && !Confirmed) {
         color = colors.deniedRed;
         status = 'Zamietnutá'
@@ -96,18 +137,70 @@ class ProfilePage extends Component {
     });
   }
 
+  handleOpen = () => {
+    this.setState({ isDialogOpen: true });
+  };
+
+  handleClose = () => {
+    this.setState({ isDialogOpen: false, errorText: '' });
+  };
+
+  handleSubmit = () => {
+    const { radioButtonValue } = this.state;
+    const { user, updateUserPoints } = this.props;
+    const { body, id } = user || {};
+
+    const mapper = {
+      '75': 6,
+      '50': 3,
+      '20': 1,
+    };
+
+    const updatedPoints = body - radioButtonValue;
+
+    if (radioButtonValue) {
+      if (updatedPoints >= 0) {
+        return updateUserPoints(radioButtonValue, id, mapper[radioButtonValue]).then(() =>{
+          this.setState({ errorText: 'Členké bolo úspešne predĺžené' })  
+        });
+      }
+      return this.setState({ errorText: 'Pre vybraté predĺženie nemáš dostatok bodov.' })
+    }
+  }
+
+  handleSort = (event, index, value) => this.setState({ sortIndex: value });
+
   handleBack = () => {
     const { history } = this.props;
 
     history.push('/books');
   }
 
+  handleRadioButtonChange = (event, value) => {
+    this.setState({ radioButtonValue: value });
+  }
+
   render() {
     const { isErrorHistoryFetching, user } = this.props;
-    const { name, poslednePrihlasenie, email, body, datRegistracie } = user || {};
+    const { errorText, isDialogOpen, sortIndex } = this.state;
+    const { name, poslednePrihlasenie, email, body, datRegistracie, platneClenske } = user || {};
 
     const posPrihlasenieTimestamp = parseDate(poslednePrihlasenie);
     const datRegistracieTimestamp = parseDate(datRegistracie);
+    const platneClenskeTimestamp = parseDate(platneClenske);
+
+    const actions = [
+      <FlatButton
+        label="Zrušiť"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Potvrdiť"
+        primary={true}
+        onClick={this.handleSubmit}
+      />,
+    ];
 
     if (isErrorHistoryFetching) {
       return (
@@ -143,11 +236,62 @@ class ProfilePage extends Component {
                 <TableRowColumn style={styles.rowTitle}>Posledné prihlásenie</TableRowColumn>
                 <TableRowColumn>{format(posPrihlasenieTimestamp, 'DD-MM-YYYY HH:mm')}</TableRowColumn>
               </TableRow>
+              <TableRow>
+                <TableRowColumn style={styles.rowTitle}>Členké platné do</TableRowColumn>
+                <TableRowColumn>{format(platneClenskeTimestamp, 'DD-MM-YYYY HH:mm')}</TableRowColumn>
+              </TableRow>
             </TableBody>
           </Table>
+          <Dialog
+            title='Predĺžiť členské pomocou bodov'
+            modal={false}
+            actions={actions}
+            open={isDialogOpen}
+            onRequestClose={this.handleClose}
+            autoScrollBodyContent={true}
+          >
+            Aktuálny počet bodov: {body}
+            <RadioButtonGroup onChange={this.handleRadioButtonChange} name='pointValue'>
+              <RadioButton
+                value='20'
+                label='O mesiac (20 bodov)'
+                style={{ marginTop: 16 }}
+              />
+              <RadioButton
+                value='50'
+                label='O 3 mesiace (50 bodov)'
+                style={{ marginTop: 16 }}
+              />
+              <RadioButton
+                value='75'
+                label='O 6 mesiacov (75 bodov)'
+                style={{ marginTop: 16, marginBottom: 16 }}
+              />
+            </RadioButtonGroup>
+            {errorText}
+          </Dialog>
+          <RaisedButton
+            fullWidth
+            overlayStyle={styles.overlayButton}
+            label='Využiť body'
+            onClick={this.handleOpen}
+          />
         </div>
-        <div className='col-md-10 offset-md-1 title' style={styles.centeredText}>
-          <h1>História chýb</h1>
+        <div className='col-md-10 offset-md-1 title'>
+          <h1 style={styles.centeredText}>História chýb</h1>
+          <div style={styles.errorTable}>
+            <span style={{ marginRight: 20 }}>Filtrovať chyby</span>
+            <SelectField
+              onChange={this.handleSort}
+              value={sortIndex}
+              selectedMenuItemStyle={{ color: colors.primary}}
+            >
+              <MenuItem value={null} primaryText='' />
+              <MenuItem value={1} primaryText='Potvrdené' />
+              <MenuItem value={2} primaryText='Čaká na vyhodnotenie' />
+              <MenuItem value={3} primaryText='Zamietnuté' />
+            </SelectField>
+          </div>
           <Table>
             <TableHeader displaySelectAll={false}>
               <TableRow>
@@ -182,4 +326,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps, { fetchErrorHistory })(ProfilePage);
+export default connect(mapStateToProps, { fetchErrorHistory, updateUserPoints })(ProfilePage);
