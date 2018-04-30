@@ -161,7 +161,7 @@ class ProfilePage extends Component {
     if (radioButtonValue) {
       if (updatedPoints >= 0) {
         return updateUserPoints(radioButtonValue, id, mapper[radioButtonValue]).then(() =>{
-          this.setState({ errorText: 'Členké bolo úspešne predĺžené' })  
+          this.setState({ errorText: 'Členké bolo úspešne predĺžené' })
         });
       }
       return this.setState({ errorText: 'Pre vybraté predĺženie nemáš dostatok bodov.' })
@@ -184,7 +184,7 @@ class ProfilePage extends Component {
     const { isErrorHistoryFetching, user } = this.props;
     const { errorText, isDialogOpen, sortIndex } = this.state;
     const { name, poslednePrihlasenie, email, body, datRegistracie, platneClenske } = user || {};
-
+    console.log(user);
     const posPrihlasenieTimestamp = parseDate(poslednePrihlasenie);
     const datRegistracieTimestamp = parseDate(datRegistracie);
     const platneClenskeTimestamp = parseDate(platneClenske);
@@ -237,7 +237,7 @@ class ProfilePage extends Component {
                 <TableRowColumn>{format(posPrihlasenieTimestamp, 'DD-MM-YYYY HH:mm')}</TableRowColumn>
               </TableRow>
               <TableRow>
-                <TableRowColumn style={styles.rowTitle}>Členké platné do</TableRowColumn>
+                <TableRowColumn style={styles.rowTitle}>Členské platné do</TableRowColumn>
                 <TableRowColumn>{format(platneClenskeTimestamp, 'DD-MM-YYYY HH:mm')}</TableRowColumn>
               </TableRow>
             </TableBody>
