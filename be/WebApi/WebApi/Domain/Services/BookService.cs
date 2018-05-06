@@ -35,11 +35,15 @@ namespace WebApi.Domain.Services
 
             var result = new List<BookViewModel>();
 
+            var errorsOnBook = new[] { "Author", "Genre", "Isbn", "YearOfPublication", "Description" };
+
             foreach (var copy in prints)
             {
                 var book = books.FirstOrDefault(b => b.id == copy.kniha_id);
 
-                var actErrors = errors.Where(er => er.vytlacok_id == copy.id && !er.vyhodnotena).ToList();
+                var printsForSameBook = prints.Where(pr => pr.id != copy.id && pr.kniha_id == copy.kniha_id).Select(pr => pr.id);
+
+                var actErrors = errors.Where(er => (er.vytlacok_id == copy.id || (printsForSameBook.Contains(er.vytlacok_id) && errorsOnBook.Contains(er.name))) && !er.vyhodnotena).ToList();
 
                 result.Add(_bookViewModelFactory.CreateBookViewModel(book, copy, actErrors));
             }
@@ -48,3 +52,4 @@ namespace WebApi.Domain.Services
         }
     }
 }
+

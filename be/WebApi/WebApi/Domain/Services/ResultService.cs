@@ -49,6 +49,11 @@ namespace WebApi.Domain.Services
                     usersMessages.Add(resultViewModel.UserId, new StringBuilder().AppendLine("Dobrý deň,").AppendLine(""));
                 }
 
+                if (!resultViewModel.IsAccepted && usersPoints.ContainsKey(resultViewModel.UserId))
+                {
+                    usersPoints.Add(resultViewModel.UserId, 0);
+                }
+
                 switch (resultViewModel.PropertyName)
                 {
                     case "Author":
@@ -57,10 +62,13 @@ namespace WebApi.Domain.Services
                             book.autor = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Autor bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Autor bola zamietnutá.");
+                        var authorMessage = GetEmailMessage(copy.name, "Autor", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(authorMessage);
 
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "CopyName":
                         if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
@@ -68,9 +76,13 @@ namespace WebApi.Domain.Services
                             copy.name = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Názov výtlačku bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Názov výtlačku bola zamietnutá.");
+                        var copyNameMessage = GetEmailMessage(copy.name, "Názov výtlačku", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(copyNameMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "Genre":
                         if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
@@ -78,9 +90,13 @@ namespace WebApi.Domain.Services
                             book.zaner = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Žáner bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Žáner bola zamietnutá.");
+                        var genreMessage = GetEmailMessage(copy.name, "Žáner", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(genreMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "Publishers":
                         if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
@@ -88,19 +104,27 @@ namespace WebApi.Domain.Services
                             copy.vydavatelstvo = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Vydavateľstvo bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Vydavateľstvo bola zamietnutá.");
+                        var publishersMessage = GetEmailMessage(copy.name, "Vydavateľstvo", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(publishersMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
-                    case "ISBN":
+                    case "Isbn":
                         if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
                         {
                             book.ISBN = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom ISBN bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom ISBN bola zamietnutá.");
+                        var isbnMessage = GetEmailMessage(copy.name, "ISBN", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(isbnMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "Language":
                         if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
@@ -108,9 +132,27 @@ namespace WebApi.Domain.Services
                             copy.jazyk = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Jazyk bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Jazyk bola zamietnutá.");
+                        var languageMessage = GetEmailMessage(copy.name, "Jazyk", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(languageMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
+                        break;
+                    case "Description":
+                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        {
+                            book.popis = resultViewModel.NewValue;
+                        }
+
+                        var descriptionMessage = GetEmailMessage(copy.name, "Popis", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(descriptionMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "NumberOfPages":
                         var number = 0;
@@ -123,10 +165,14 @@ namespace WebApi.Domain.Services
                             }
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(number != 0 && resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Počet strán bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Počet strán bola zamietnutá.");
+                        var accesorNumberOfPages = number != 0 && resultViewModel.IsAccepted;
+                        var numberOfPagesMessage = GetEmailMessage(copy.name, "Počet strán", resultViewModel.NewValue, accesorNumberOfPages, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(numberOfPagesMessage);
 
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "ReleaseFormat":
                         if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
@@ -134,9 +180,13 @@ namespace WebApi.Domain.Services
                             copy.formatVydania = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Formát vydania bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Formát Vydania bola zamietnutá.");
+                        var releaseFormatMessage = GetEmailMessage(copy.name, "Formát vydania", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(releaseFormatMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "BindingType":
                         if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
@@ -144,9 +194,13 @@ namespace WebApi.Domain.Services
                             copy.typVazby = resultViewModel.NewValue;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Typ väzby bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Typ väzby bola zamietnutá.");
+                        var bindingTypeMessage = GetEmailMessage(copy.name, "Typ väzby", resultViewModel.NewValue, resultViewModel.IsAccepted, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(bindingTypeMessage);
+
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
                         break;
                     case "YearOfPublication":
                         var date = DateTime.MinValue;
@@ -156,19 +210,15 @@ namespace WebApi.Domain.Services
                                 book.rokVydania = date;
                         }
 
-                        usersMessages[resultViewModel.UserId].AppendLine(date != DateTime.MinValue && resultViewModel.IsAccepted
-                            ? $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Rok vydania bola úspešne schválená."
-                            : $"Vami navrhnutá hodnota ({resultViewModel.NewValue}) na výtlačku {copy.name} a položke s názvom Rok vydania bola zamietnutá.");
-                        break;
-                }
+                        var accesorYearOfPublication = date != DateTime.MinValue && resultViewModel.IsAccepted;
+                        var yearOfPublicationMessage = GetEmailMessage(copy.name, "Rok vydania", resultViewModel.NewValue, accesorYearOfPublication, 5);
+                        usersMessages[resultViewModel.UserId].AppendLine(yearOfPublicationMessage);
 
-                if (resultViewModel.IsAccepted && usersPoints.ContainsKey(resultViewModel.UserId))
-                {
-                    usersPoints[resultViewModel.UserId] += 5; 
-                }
-                else
-                {
-                    usersPoints.Add(resultViewModel.UserId, 5);
+                        if (resultViewModel.IsAccepted)
+                        {
+                            usersPoints[resultViewModel.UserId] += 5;
+                        }
+                        break;
                 }
 
                 var errors = _errorServiceRepository.GetErrorsByCopyId(copyId);
@@ -204,6 +254,13 @@ namespace WebApi.Domain.Services
 
                 _emailServiceRepository.SendEmail(userEmail, "Rozhodnutie o návrhoch na opravenie údajov", message.ToString());
             }
+        }
+
+        private static string GetEmailMessage(string copyName, string propertyName, string newValue, bool accesor, int points)
+        {
+            return accesor
+                ? $"Vami navrhnutá hodnota ({newValue}) na výtlačku {copyName} a položke s názvom {propertyName} bola úspešne schválená a bolo Vám pridaných {points} bodov."
+                : $"Vami navrhnutá hodnota ({newValue}) na výtlačku {copyName} a položke s názvom {propertyName} bola zamietnutá.";
         }
     }
 }
