@@ -49,7 +49,7 @@ namespace WebApi.Domain.Services
                     usersMessages.Add(resultViewModel.UserId, new StringBuilder().AppendLine("Dobrý deň,").AppendLine(""));
                 }
 
-                if (!resultViewModel.IsAccepted && usersPoints.ContainsKey(resultViewModel.UserId))
+                if (!usersPoints.ContainsKey(resultViewModel.UserId))
                 {
                     usersPoints.Add(resultViewModel.UserId, 0);
                 }
@@ -57,7 +57,7 @@ namespace WebApi.Domain.Services
                 switch (resultViewModel.PropertyName)
                 {
                     case "Author":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             book.autor = resultViewModel.NewValue;
                         }
@@ -71,7 +71,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "CopyName":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             copy.name = resultViewModel.NewValue;
                         }
@@ -85,7 +85,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "Genre":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             book.zaner = resultViewModel.NewValue;
                         }
@@ -99,7 +99,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "Publishers":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             copy.vydavatelstvo = resultViewModel.NewValue;
                         }
@@ -113,7 +113,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "Isbn":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             book.ISBN = resultViewModel.NewValue;
                         }
@@ -127,7 +127,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "Language":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             copy.jazyk = resultViewModel.NewValue;
                         }
@@ -141,7 +141,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "Description":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             book.popis = resultViewModel.NewValue;
                         }
@@ -157,7 +157,7 @@ namespace WebApi.Domain.Services
                     case "NumberOfPages":
                         var number = 0;
 
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             if (int.TryParse(resultViewModel.NewValue, out number))
                             {
@@ -175,7 +175,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "ReleaseFormat":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             copy.formatVydania = resultViewModel.NewValue;
                         }
@@ -189,7 +189,7 @@ namespace WebApi.Domain.Services
                         }
                         break;
                     case "BindingType":
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             copy.typVazby = resultViewModel.NewValue;
                         }
@@ -204,7 +204,7 @@ namespace WebApi.Domain.Services
                         break;
                     case "YearOfPublication":
                         var date = DateTime.MinValue;
-                        if (resultViewModel.IsAccepted || resultViewModel.ChangedByadmin)
+                        if (resultViewModel.IsAccepted || resultViewModel.IsChangedByadmin)
                         {
                             if (DateTime.TryParse(resultViewModel.NewValue, out date))
                                 book.rokVydania = date;

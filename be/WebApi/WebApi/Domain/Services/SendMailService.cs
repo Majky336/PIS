@@ -24,6 +24,10 @@ namespace WebApi.Domain.Services
             stringBuilder.AppendLine("Dobnrý deň,");
             stringBuilder.AppendLine($"Vaše heslo je {password}");
 
+            stringBuilder.AppendLine("");
+            stringBuilder.AppendLine("S pozdravom,");
+            stringBuilder.AppendLine("Vaša knižnica");
+
             _emailServiceRepository.SendEmail(email, subject, stringBuilder.ToString());
         }
 
@@ -40,6 +44,10 @@ namespace WebApi.Domain.Services
                 .Select(er => $"Starý údaj: {er.OldValue}, nový údaj: {er.NewValue}, názov údaju: {er.PropertyName}").ToList();
 
             messages.ForEach(message => stringBuilder.AppendLine(message));
+
+            stringBuilder.AppendLine("");
+            stringBuilder.AppendLine("S pozdravom,");
+            stringBuilder.AppendLine("Vaša knižnica");
 
             _emailServiceRepository.SendEmail(email, subject, stringBuilder.ToString());
         }
