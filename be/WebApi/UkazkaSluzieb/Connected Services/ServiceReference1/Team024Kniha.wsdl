@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:ns="http://labss2.fiit.stuba.sk/pis/students/team024kniha/types" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://labss2.fiit.stuba.sk/pis/students/team024kniha" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Team024Kniha" targetNamespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://labss2.fiit.stuba.sk/pis/students/team024kniha/types" targetNamespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha/types">
+      <xsd:complexType name="getById">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getById" nillable="true" type="ns:getById" />
+      <xsd:complexType name="Kniha">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="ISBN" type="xsd:string" />
+          <xsd:element name="autor" type="xsd:string" />
+          <xsd:element name="zaner" type="xsd:string" />
+          <xsd:element name="popis" type="xsd:string" />
+          <xsd:element name="rokVydania" type="xsd:date" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Kniha" nillable="true" type="ns:Kniha" />
+      <xsd:complexType name="getByIdResponse">
+        <xsd:sequence>
+          <xsd:element name="kniha" type="ns:Kniha" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByIdResponse" nillable="true" type="ns:getByIdResponse" />
+      <xsd:complexType name="ArrayOfIds">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="id" nillable="true" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getByAttributeValue">
+        <xsd:sequence>
+          <xsd:element name="attribute_name" type="xsd:string" />
+          <xsd:element name="attribute_value" type="xsd:string" />
+          <xsd:element name="ids" type="ns:ArrayOfIds" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByAttributeValue" nillable="true" type="ns:getByAttributeValue" />
+      <xsd:complexType name="ArrayOfKnihas">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="kniha" nillable="true" type="ns:Knihas" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Knihas">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="ISBN" type="xsd:string" />
+          <xsd:element name="autor" type="xsd:string" />
+          <xsd:element name="zaner" type="xsd:string" />
+          <xsd:element name="popis" type="xsd:string" />
+          <xsd:element name="rokVydania" type="xsd:date" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Knihas" nillable="true" type="ns:Knihas" />
+      <xsd:complexType name="getByAttributeValueResponse">
+        <xsd:sequence>
+          <xsd:element name="knihas" type="ns:ArrayOfKnihas" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByAttributeValueResponse" nillable="true" type="ns:getByAttributeValueResponse" />
+      <xsd:complexType name="getByNumericCondition">
+        <xsd:sequence>
+          <xsd:element name="attribute_name" type="xsd:string" />
+          <xsd:element name="attribute_value" type="xsd:string" />
+          <xsd:element name="math_condition" type="xsd:string" />
+          <xsd:element name="ids" type="ns:ArrayOfIds" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByNumericCondition" nillable="true" type="ns:getByNumericCondition" />
+      <xsd:complexType name="getByNumericConditionResponse">
+        <xsd:sequence>
+          <xsd:element name="knihas" type="ns:ArrayOfKnihas" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getByNumericConditionResponse" nillable="true" type="ns:getByNumericConditionResponse" />
+      <xsd:complexType name="getAll">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:element name="getAll" nillable="true" type="ns:getAll" />
+      <xsd:complexType name="getAllResponse">
+        <xsd:sequence>
+          <xsd:element name="knihas" type="ns:ArrayOfKnihas" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getAllResponse" nillable="true" type="ns:getAllResponse" />
+      <xsd:complexType name="insert">
+        <xsd:sequence>
+          <xsd:element name="team_id" type="xsd:string" />
+          <xsd:element name="team_password" type="xsd:string" />
+          <xsd:element name="Kniha" type="ns:Kniha" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="insert" nillable="true" type="ns:insert" />
+      <xsd:complexType name="insertResponse">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="insertResponse" nillable="true" type="ns:insertResponse" />
+      <xsd:complexType name="update">
+        <xsd:sequence>
+          <xsd:element name="team_id" type="xsd:string" />
+          <xsd:element name="team_password" type="xsd:string" />
+          <xsd:element name="entity_id" type="xsd:int" />
+          <xsd:element name="Kniha" type="ns:Kniha" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="update" nillable="true" type="ns:update" />
+      <xsd:complexType name="updateResponse">
+        <xsd:sequence>
+          <xsd:element name="updates" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="updateResponse" nillable="true" type="ns:updateResponse" />
+      <xsd:complexType name="delete">
+        <xsd:sequence>
+          <xsd:element name="team_id" type="xsd:string" />
+          <xsd:element name="team_password" type="xsd:string" />
+          <xsd:element name="entity_id" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="delete" nillable="true" type="ns:delete" />
+      <xsd:complexType name="deleteResponse">
+        <xsd:sequence>
+          <xsd:element name="deleted" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="deleteResponse" nillable="true" type="ns:deleteResponse" />
+    </xsd:schema>
+  </types>
+  <message name="getByIdRequest">
+    <part name="parameters" element="ns:getById" />
+  </message>
+  <message name="getByIdResponse">
+    <part name="parameters" element="ns:getByIdResponse" />
+  </message>
+  <message name="getByAttributeValueRequest">
+    <part name="parameters" element="ns:getByAttributeValue" />
+  </message>
+  <message name="getByAttributeValueResponse">
+    <part name="parameters" element="ns:getByAttributeValueResponse" />
+  </message>
+  <message name="getByNumericConditionRequest">
+    <part name="parameters" element="ns:getByNumericCondition" />
+  </message>
+  <message name="getByNumericConditionResponse">
+    <part name="parameters" element="ns:getByNumericConditionResponse" />
+  </message>
+  <message name="getAllRequest">
+    <part name="parameters" element="ns:getAll" />
+  </message>
+  <message name="getAllResponse">
+    <part name="parameters" element="ns:getAllResponse" />
+  </message>
+  <message name="insertRequest">
+    <part name="parameters" element="ns:insert" />
+  </message>
+  <message name="insertResponse">
+    <part name="parameters" element="ns:insertResponse" />
+  </message>
+  <message name="updateRequest">
+    <part name="parameters" element="ns:update" />
+  </message>
+  <message name="updateResponse">
+    <part name="parameters" element="ns:updateResponse" />
+  </message>
+  <message name="deleteRequest">
+    <part name="parameters" element="ns:delete" />
+  </message>
+  <message name="deleteResponse">
+    <part name="parameters" element="ns:deleteResponse" />
+  </message>
+  <portType name="Team024KnihaPortType">
+    <operation name="getById">
+      <input message="tns:getByIdRequest" />
+      <output message="tns:getByIdResponse" />
+    </operation>
+    <operation name="getByAttributeValue">
+      <input message="tns:getByAttributeValueRequest" />
+      <output message="tns:getByAttributeValueResponse" />
+    </operation>
+    <operation name="getByNumericCondition">
+      <input message="tns:getByNumericConditionRequest" />
+      <output message="tns:getByNumericConditionResponse" />
+    </operation>
+    <operation name="getAll">
+      <input message="tns:getAllRequest" />
+      <output message="tns:getAllResponse" />
+    </operation>
+    <operation name="insert">
+      <input message="tns:insertRequest" />
+      <output message="tns:insertResponse" />
+    </operation>
+    <operation name="update">
+      <input message="tns:updateRequest" />
+      <output message="tns:updateResponse" />
+    </operation>
+    <operation name="delete">
+      <input message="tns:deleteRequest" />
+      <output message="tns:deleteResponse" />
+    </operation>
+  </portType>
+  <binding name="Team024KnihaBinding" type="tns:Team024KnihaPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getById">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024kniha/#getById" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </output>
+    </operation>
+    <operation name="getByAttributeValue">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024kniha/#getByAttributeValue" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </output>
+    </operation>
+    <operation name="getByNumericCondition">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024kniha/#getByNumericCondition" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </output>
+    </operation>
+    <operation name="getAll">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024kniha/#getAll" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </output>
+    </operation>
+    <operation name="insert">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024kniha/#insert" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </output>
+    </operation>
+    <operation name="update">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024kniha/#update" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </output>
+    </operation>
+    <operation name="delete">
+      <soap:operation soapAction="http://labss2.fiit.stuba.sk/pis/students/team024kniha/#delete" />
+      <input>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://labss2.fiit.stuba.sk/pis/students/team024kniha" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Team024KnihaService">
+    <port name="Team024KnihaPort" binding="tns:Team024KnihaBinding">
+      <soap:address location="http://labss2.fiit.stuba.sk/pis/ws/Students/Team024Kniha" />
+    </port>
+  </service>
+</definitions>
